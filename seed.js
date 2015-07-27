@@ -22,6 +22,9 @@ var Promise = require('bluebird');
 var chalk = require('chalk');
 var connectToDb = require('./server/db');
 var User = Promise.promisifyAll(mongoose.model('User'));
+var Game = Promise.promisifyAll(mongoose.model('Game'));
+
+
 
 var seedUsers = function () {
 
@@ -40,19 +43,60 @@ var seedUsers = function () {
 
 };
 
-connectToDb.then(function () {
+var seedGames = function() {
+
+    var games = [
+        {
+            title: 'Tetris',
+            description: 'falling blocks and such',
+            screenshots: ["http://web-vassets.ea.com/Assets/Richmedia/Image/Screenshots/tetris-mobile-screenshot-2_656x369.jpg?cb=1412974779",
+            "http://www.fractalise.com/wp-content/uploads/2014/12/blog_img_tet1.jpg"],
+            price: 3,
+            downloads: 40
+        }
+    ];
+
+    return Game.createAsync(games);
+
+};
+
+connectToDb
+.then(function () {
     User.findAsync({}).then(function (users) {
+
         if (users.length === 0) {
             return seedUsers();
         } else {
-            console.log(chalk.magenta('Seems to already be user data, exiting!'));
+            console.log(chalk.magenta('Seems to already be user data, going to games!'));
+<<<<<<< Updated upstream
+            return;
+=======
             process.kill(0);
+>>>>>>> Stashed changes
         }
-    }).then(function () {
+    })
+    .then(function () {
+        console.log("this works")
+<<<<<<< Updated upstream
+        return Game.findAsync({}).then(function (games) {
+=======
+        Game.findAsync({}).then(function (games) {
+>>>>>>> Stashed changes
+            console.log("this doesn't work?")
+            if (games.length === 0) {
+                return seedGames();
+            } else{
+                console.log(chalk.magenta('Seems to already be game data, exiting!'));
+                process.kill(0);
+            }
+        })
+    })
+    .then(function () {
         console.log(chalk.green('Seed successful!'));
         process.kill(0);
     }).catch(function (err) {
         console.error(err);
         process.kill(1);
     });
-});
+}
+);
