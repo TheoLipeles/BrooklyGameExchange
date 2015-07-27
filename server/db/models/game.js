@@ -8,9 +8,7 @@ var schema = new mongoose.Schema({
     description: {
         type: String
     },
-    screenshots: [{
-        type: Object
-    }],
+    screenshots: [String],
     price: Number,
     downloads: Number,
     developer: {type: mongoose.Schema.ObjectId, ref: 'User'},
