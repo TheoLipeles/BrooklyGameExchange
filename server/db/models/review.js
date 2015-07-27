@@ -9,4 +9,6 @@ var schema = new mongoose.Schema({
     author: {type: mongoose.Schema.ObjectId, ref: 'User'}
 });
 
-mongoose.model('Review', schema);
+var Review = mongoose.model('Review', schema);
+
+module.exports = Review;
