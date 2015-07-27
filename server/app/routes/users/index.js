@@ -16,7 +16,7 @@ var ensureAuthenticated = function (req, res, next) {
 router.get('/', function (req, res, next) {
     User.find({})
     .then(function(users){
-        res.send(users.data);   
+        res.send(users);   
     })
     .then(null, function(){
         var err = new Error('You Ain\'t got No Users!');
@@ -28,7 +28,7 @@ router.get('/', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
     User.findbyId({_id: req.body.id})
     .then(function(user){
-        res.send(user.data);   
+        res.send(user);   
     })
     .then(null, function(){
         var err = new Error('User Not Found');
@@ -40,7 +40,7 @@ router.get('/:id', function (req, res, next) {
 router.get('/:id/games', function (req, res, next) {
     User.findbyId({_id: req.body.id})
     .then(function(user){
-        res.send(user.data.games);   
+        res.send(user.games);   
     })
     .then(null, function(){
         var err = new Error('User Not Found');
@@ -52,7 +52,7 @@ router.get('/:id/games', function (req, res, next) {
 router.get('/:id/reviews', function (req, res, next) {
     User.findbyId({_id: req.body.id})
     .then(function(user){
-        res.send(user.data.reviews);   
+        res.send(user.reviews);   
     })
     .then(null, function(){
         var err = new Error('User Not Found');
