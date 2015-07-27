@@ -11,6 +11,7 @@ var schema = new mongoose.Schema({
     screenshots: [String],
     price: Number,
     downloads: Number,
+    genre: String,
     developer: {type: mongoose.Schema.ObjectId, ref: 'User'},
     reviews: [{type: mongoose.Schema.ObjectId, ref: 'Review'}]
 });
