@@ -19,7 +19,7 @@ router.get('/:id', function (req,res){
 	.then(function(game){
 		res.send(game)
 	},function(err){
-		res.sendStatus(404)
+		res.status(404).send(err);
 	})
 })
 
@@ -28,7 +28,7 @@ router.get('/:id/reviews', function(req,res){
 	.then(function(reviews){
 		res.send(reviews)
 	},function(err){
-		res.sendStatus(404)
+		res.status(404).send(err);
 	})
 })
 
