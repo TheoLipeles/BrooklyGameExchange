@@ -68,12 +68,20 @@ connectToDb
             return seedUsers();
         } else {
             console.log(chalk.magenta('Seems to already be user data, going to games!'));
+<<<<<<< Updated upstream
             return;
+=======
+            process.kill(0);
+>>>>>>> Stashed changes
         }
     })
     .then(function () {
         console.log("this works")
+<<<<<<< Updated upstream
         return Game.findAsync({}).then(function (games) {
+=======
+        Game.findAsync({}).then(function (games) {
+>>>>>>> Stashed changes
             console.log("this doesn't work?")
             if (games.length === 0) {
                 return seedGames();
