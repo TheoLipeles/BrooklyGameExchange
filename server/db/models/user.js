@@ -12,6 +12,21 @@ var schema = new mongoose.Schema({
     salt: {
         type: String
     },
+    purchaseHistory: {
+        type: [{type: mongoose.Schema.ObjectId, ref:"Game"}]
+    },
+    reviews: {
+        type: [{type: mongoose.Schema.ObjectId, ref:"Review"}]
+    },
+    cart: {
+        type: [{type: mongoose.Schema.ObjectId, ref:"Game"}]
+    },
+    isDev: {
+        type: Boolean
+    },
+    createdGames: {
+        type: [{type: mongoose.Schema.ObjectId, ref:"Game"}]
+    },
     twitter: {
         id: String,
         username: String,
