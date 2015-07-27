@@ -5,10 +5,20 @@ var _ = require('lodash');
 var Game = require('../../../db/models/game.js')
 var Review = require('../../../db/models/review.js')
 
+router.get('/', function (req,res){
+	console.log("hey!")
+	Game.find({})
+	.then(function(games){
+		res.send(games)
+	},function(){
+		res.sendStatus(404)
+	})
+})
+
 router.get('/:id', function (req,res){
 	Game.find({_id: req.params.id})
 	.then(function(game){
-		res.send(game.data)
+		res.send(game)
 	},function(err){
 		res.sendStatus(404)
 	})
@@ -17,8 +27,9 @@ router.get('/:id', function (req,res){
 router.get('/:id/reviews', function(req,res){
 	Review.find({game: req.params.id})
 	.then(function(reviews){
-		res.send(reviews.data)
+		res.send(reviews)
 	},function(err){
 		res.sendStatus(404)
 	})
 })
+
