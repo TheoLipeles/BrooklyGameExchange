@@ -1,0 +1,32 @@
+single-game-thumb {
+	display: inline;
+
+  .individualcontainer {
+  	box-sizing: border-box;
+  	cursor: pointer;
+  	display: inline-block;
+  	overflow: hidden;
+  	width: 250px;
+  	height: 250px;
+  	background: #333;
+  	border-radius: 5px;
+
+  	
+
+	  .littlelabel {
+	  	font-size: 14pt;
+	  	padding: 10px;
+	  	color: white;
+	  }
+
+	  img {
+	  	position: relative;
+	  	display: inline;
+	  	width: 260px;
+	  	height: 80%;
+	  	left: 0px;
+	  }
+  	
+  }
+
+}
