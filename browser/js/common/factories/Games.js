@@ -11,7 +11,8 @@ app.factory('Games', function ($http) {
 		getOne: function(id){
 			return $http.get('/api/games/'+id)
 			.then(function(game){
-				return game.data
+				//I AM MAKING THIS [0] FOR NOW BUT WHEN IT BREAKS, GO LOOK AT THE ROUTES 
+				return game.data[0]
 			});
 		}
 

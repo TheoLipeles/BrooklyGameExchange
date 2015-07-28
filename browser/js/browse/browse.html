@@ -1,7 +1,10 @@
 <div ng-controller="BrowseCtrl">
 
-{{gamesList}}
+<div ng-repeat="game in gamesList" ui-sref="agame({id: game._id})"><a><h1>{{ game.title }}</br></h1></a></div>
 
-<a ng-repeat="game in gamesList" ui-sref="agame({id: game._id})">{{ game.title }}</a>
+<single-game-thumb ng-repeat="game in gamesList" ui-sref="agame({id: game._id})"></single-game-thumb>
+
+<pre spacing="default">{{gamesList | json}}</pre>
+
 
 </div>
