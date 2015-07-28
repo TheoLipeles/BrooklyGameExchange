@@ -23,7 +23,7 @@ var chalk = require('chalk');
 var connectToDb = require('./server/db');
 var User = Promise.promisifyAll(mongoose.model('User'));
 var Game = Promise.promisifyAll(mongoose.model('Game'));
-
+var http = require("http");
 
 
 var seedUsers = function () {
@@ -56,6 +56,7 @@ var seedGames = function() {
         }
     ];
 
+
     return Game.createAsync(games);
 
 };
@@ -72,16 +73,16 @@ connectToDb
         }
     })
     .then(function () {
-        console.log("this works")
+        console.log("this works");
         return Game.findAsync({}).then(function (games) {
-            console.log("this doesn't work?")
+            console.log("this doesn't work?");
             if (games.length === 0) {
                 return seedGames();
             } else{
                 console.log(chalk.magenta('Seems to already be game data, exiting!'));
                 process.kill(0);
             }
-        })
+        });
     })
     .then(function () {
         console.log(chalk.green('Seed successful!'));
