@@ -8,6 +8,15 @@ var Game = Promise.promisifyAll(mongoose.model('Game'));
 var Review = Promise.promisifyAll(mongoose.model('Review'));
 var async = require("async");
 
+Game.remove({}, function(err) {
+	console.log("collection cleared");
+});
+
+Review.remove({}, function(err) {
+	console.log("collection cleared");
+});
+
+
 function getGame(url) {
 	var game = {};
 	http.get(url, function(res) {
@@ -19,6 +28,7 @@ function getGame(url) {
 	    	body = JSON.parse(body).result;
 	    	game.title = body.title;
 	    	game.description = body.description;
+	    	game.screenshots = ["http://archive.org/services/img/" + url.match(/metadata\/(.*)\/metadata/)[1]];
 	    	http.get(url.slice(0, url.length - 9), function(res) {
 	    		var reviews = "";
 			    res.on("data", function(chunk) {
