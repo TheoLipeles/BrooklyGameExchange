@@ -103,7 +103,7 @@ describe('User model', function () {
             var saltSpy;
 
             var createUser = function () {
-                return User.create({ email: 'obama@gmail.com', password: 'potus' });
+                return User.create({ name: 'pete', password: 'pete'});
             };
 
             beforeEach(function () {
@@ -119,7 +119,7 @@ describe('User model', function () {
             it('should call User.encryptPassword with the given password and generated salt', function (done) {
                 createUser().then(function () {
                     var generatedSalt = saltSpy.getCall(0).returnValue;
-                    expect(encryptSpy.calledWith('potus', generatedSalt)).to.be.ok;
+                    expect(encryptSpy.calledWith('pete', generatedSalt)).to.be.ok;
                     done();
                 });
             });
@@ -143,5 +143,7 @@ describe('User model', function () {
         });
 
     });
+    
+
 
 });
