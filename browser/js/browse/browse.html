@@ -1,8 +1,10 @@
 <div ng-controller="BrowseCtrl">
 
-<div ng-repeat="game in gamesList" ui-sref="agame({id: game._id})"><a><h1>{{ game.title }}</br></h1></a></div>
+<p>sort by: <span ng-click="sortBy('title')">title</span> | <span ng-click="sortBy('downloads')">downloads</span> | <span ng-click="sortBy('genre')">genre </span> | <span ng-click="sortBy('price')">minimum price</span></p>
 
-<single-game-thumb ng-repeat="game in gamesList" ui-sref="agame({id: game._id})"></single-game-thumb>
+<div id = "bigcontainer">
+<single-game-thumb ng-repeat="game in gamesList | orderBy : sortMethod " ui-sref="agame({id: game._id})"></single-game-thumb>
+</div>
 
 <pre spacing="default">{{gamesList | json}}</pre>
 
