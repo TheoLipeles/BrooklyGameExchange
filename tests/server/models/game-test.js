@@ -27,8 +27,8 @@ describe('Game model', function () {
     });
 
 
-    describe('ratings virtual', function() {
-        it ('calculates average rating for a game', function(done){
+    xdescribe('ratings method', function() {
+        xit ('calculates average rating for a game', function(done){
             var avg, game;
             var reviewArray = [];
 
@@ -48,19 +48,23 @@ describe('Game model', function () {
                 avg = sum / reviewArray.length;
                 avg = Math.round(avg * 10) / 10;
                 game = newGame;
-                return true;
+                game.save();
             })
             .then(function() {
-                Review.create(reviewArray[0])
-                .then(function(){
-                    Review.create(reviewArray[1])
-                })
-                .then(function(){
-                    Review.create(reviewArray[2])
-                })
-                .then(function(){
-                    done();
+                return Review.create(reviewArray);
+            }).then(function(reviews) {
+                reviews = reviews.map(function(rev) {
+                    return rev._id;
                 });
+                return Game.findByIdAndUpdate(game._id, {$set: {reviews: reviews}});
+            }).then(function(updatedGame) {
+                return Game.findById(game._id);
+            }).then(function(g) {
+                return g.getRating();
+            }).then(function(rating) {
+                console.log("got Rating", rating);
+                expect(rating).to.equal(avg);
+                done();
             });
         });
     });
