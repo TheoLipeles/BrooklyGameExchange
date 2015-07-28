@@ -4,10 +4,12 @@ var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
     email: {
-        type: String
+        type: String,
+        required: true
     },
     password: {
-        type: String
+        type: String,
+        required: true
     },
     salt: {
         type: String
@@ -22,7 +24,8 @@ var schema = new mongoose.Schema({
         type: [{type: mongoose.Schema.ObjectId, ref:"Game"}]
     },
     isDev: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
     createdGames: {
         type: [{type: mongoose.Schema.ObjectId, ref:"Game"}]
