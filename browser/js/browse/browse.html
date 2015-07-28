@@ -1,0 +1,7 @@
+<div ng-controller="BrowseCtrl">
+
+{{gamesList}}
+
+<a ng-repeat="game in gamesList" ui-sref="agame({id: game._id})">{{ game.title }}</a>
+
+</div>
