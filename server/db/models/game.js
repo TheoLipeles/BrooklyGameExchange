@@ -3,14 +3,21 @@ var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
     title: {
-        type: String
+        type: String,
+        default: 'untitled'
     },
     description: {
         type: String
     },
     screenshots: [String],
-    price: Number,
-    downloads: Number,
+    minPrice: {
+        type: Number,
+        default: 0
+    },
+    downloads: {
+        type: Number,
+        default: 0
+    },
     genre: String,
     developer: {type: mongoose.Schema.ObjectId, ref: 'User'},
     reviews: [{type: mongoose.Schema.ObjectId, ref: 'Review'}]
@@ -22,7 +29,8 @@ schema.virtual('rating').get(function() {
         var sum = reviews.reduce(function(a,b){
             return a.rating + b.rating;
         }, 0);
-        return sum / reviews.length;
+        var avg = sum / reviews.length;
+        return Math.round(avg * 10) / 10;
     });
 });
 
