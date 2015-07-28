@@ -41,7 +41,7 @@ router.get('/:id', function (req, res, next) {
 router.get('/:id/games', function (req, res, next) {
     User.findById(req.params.id)
     .then(function(user){
-        res.send(user.games);   
+        res.send(user.createdGames);   
     })
     .then(null, function(){
         var err = new Error('User Not Found');
