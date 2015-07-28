@@ -65,7 +65,7 @@ router.get('/:id/reviews', function (req, res, next) {
 router.post('/:id/games', 
     // ensureAuthenticated,
 
-    function (req, res) {
+    function (req, res, next) {
         console.log("new games route")
         req.body.developer = req.params.id;
         Game.create(req.body)
