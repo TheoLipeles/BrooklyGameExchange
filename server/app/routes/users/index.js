@@ -16,7 +16,7 @@ var ensureAuthenticated = function (req, res, next) {
 router.get('/', function (req, res, next) {
     User.find({})
     .then(function(users){
-        res.send(users);   
+        res.json(users);   
     })
     .then(null, function(){
         var err = new Error('You Ain\'t got No Users!');
@@ -29,7 +29,7 @@ router.get('/:id', function (req, res, next) {
     console.log("this route")
     User.findById(req.params.id)
     .then(function(user){
-        res.send(user);   
+        res.json(user);   
     })
     .then(null, function(){
         var err = new Error('User Not Found');
@@ -41,7 +41,7 @@ router.get('/:id', function (req, res, next) {
 router.get('/:id/games', function (req, res, next) {
     User.findById(req.params.id)
     .then(function(user){
-        res.send(user.createdGames);   
+        res.json(user.createdGames);   
     })
     .then(null, function(){
         var err = new Error('User Not Found');
@@ -53,7 +53,7 @@ router.get('/:id/games', function (req, res, next) {
 router.get('/:id/reviews', function (req, res, next) {
     User.findById(req.params.id)
     .then(function(user){
-        res.send(user.reviews);   
+        res.json(user.reviews);   
     })
     .then(null, function(){
         var err = new Error('User Not Found');
@@ -72,7 +72,7 @@ router.post('/:id/games',
         .then(function(game){
             game.save()
             .then(function(){
-                res.send(game);   
+                res.json(201,game);   
             });
         })
         .then(null, function(){
@@ -92,7 +92,7 @@ router.post('/:id/reviews',
         .then(function(review){
             review.save()
             .then(function(){
-                res.send(review);   
+                res.json(201,review);   
             });
         })
         .then(null, function(){
