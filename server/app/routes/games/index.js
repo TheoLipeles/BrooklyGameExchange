@@ -8,7 +8,7 @@ var Review = require('../../../db/models/review.js')
 router.get('/', function (req,res){
 	Game.find({})
 	.then(function(games){
-		res.send(games)
+		res.json(games)
 	},function(){
 		res.sendStatus(404)
 	})
@@ -17,7 +17,7 @@ router.get('/', function (req,res){
 router.get('/:id', function (req,res){
 	Game.find({_id: req.params.id})
 	.then(function(game){
-		res.send(game)
+		res.json(game)
 	},function(err){
 		res.status(404).send(err);
 	})
@@ -26,7 +26,7 @@ router.get('/:id', function (req,res){
 router.get('/:id/reviews', function(req,res){
 	Review.find({game: req.params.id})
 	.then(function(reviews){
-		res.send(reviews)
+		res.json(reviews)
 	},function(err){
 		res.status(404).send(err);
 	})
