@@ -26,7 +26,8 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/:id', function (req, res, next) {
-    User.findbyId({_id: req.body.id})
+    console.log("this route")
+    User.findById(req.params.id)
     .then(function(user){
         res.send(user);   
     })
@@ -38,7 +39,7 @@ router.get('/:id', function (req, res, next) {
 });
 
 router.get('/:id/games', function (req, res, next) {
-    User.findbyId({_id: req.body.id})
+    User.findById(req.params.id)
     .then(function(user){
         res.send(user.games);   
     })
@@ -50,7 +51,7 @@ router.get('/:id/games', function (req, res, next) {
 });
 
 router.get('/:id/reviews', function (req, res, next) {
-    User.findbyId({_id: req.body.id})
+    User.findById(req.params.id)
     .then(function(user){
         res.send(user.reviews);   
     })
@@ -61,30 +62,44 @@ router.get('/:id/reviews', function (req, res, next) {
     });
 });
 
-router.post('/:id/games', ensureAuthenticated, function (req, res, next) {
-    Game.create(req.body)
-    .save()
-    .then(function(game){
-        res.send(game);   
-    })
-    .then(null, function(){
-        var err = new Error('Error: Game Not Created');
-        err.status = 500;
-        next(err);
-    });
-});
+router.post('/:id/games', 
+    // ensureAuthenticated,
 
-router.post('/:id/reviews', ensureAuthenticated, function (req, res, next) {
-    Review.create(req.body)
-    .save()
-    .then(function(review){
-        res.send(review);   
-    })
-    .then(null, function(){
-        var err = new Error('Error: Review Not Created');
-        err.status = 500;
-        next(err);
+    function (req, res) {
+        console.log("new games route")
+        req.body.developer = req.params.id;
+        Game.create(req.body)
+        .then(function(game){
+            game.save()
+            .then(function(){
+                res.send(game);   
+            });
+        })
+        .then(null, function(){
+            var err = new Error('Error: Game Not Created');
+            err.status = 500;
+            next(err);
+        });
     });
-});
+
+
+router.post('/:id/reviews',
+    // ensureAuthenticated,
+    function (req, res, next) {
+        req.body.author = req.params.id;
+        Review.create(req.body)
+
+        .then(function(review){
+            review.save()
+            .then(function(){
+                res.send(review);   
+            });
+        })
+        .then(null, function(){
+            var err = new Error('Error: Review Not Created');
+            err.status = 500;
+            next(err);
+        });
+    });
 
 module.exports = router;
