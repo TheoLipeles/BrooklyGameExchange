@@ -25,6 +25,25 @@ describe('User model', function () {
         expect(User).to.be.a('function');
     });
 
+    describe('required fields', function(){
+
+        it('does not allow a User to be created without a password', function(done){
+            User.create({email: 'pete'})
+            .then(null, function(err){
+                expect(err).to.be.a('object');
+                done();
+            });
+        });
+
+        it('does not allow a User to be created without a password', function(done){
+            User.create({password: 'password'})
+            .then(null, function(err){
+                expect(err).to.be.a('object');
+                done();
+            });
+        });
+    });
+
     describe('password encryption', function () {
 
         describe('generateSalt method', function () {
@@ -103,7 +122,7 @@ describe('User model', function () {
             var saltSpy;
 
             var createUser = function () {
-                return User.create({ name: 'pete', password: 'pete'});
+                return User.create({ email: 'pete', password: 'pete'});
             };
 
             beforeEach(function () {
@@ -139,11 +158,6 @@ describe('User model', function () {
                     done();
                 });
             });
-
         });
-
     });
-    
-
-
 });
