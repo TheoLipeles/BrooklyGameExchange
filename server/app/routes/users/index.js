@@ -29,6 +29,7 @@ router.get('/:id', function (req, res, next) {
     console.log("this route")
     User.findById(req.params.id)
     .then(function(user){
+        console.log(user);
         res.json(user);   
     })
     .then(null, function(){

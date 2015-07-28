@@ -20,6 +20,10 @@ body {
   margin: 0 auto;
 }
 
+#bigcontainer{
+  display: inline;
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
