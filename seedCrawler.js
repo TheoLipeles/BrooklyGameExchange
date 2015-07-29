@@ -32,6 +32,7 @@ function getGame(url) {
 	    	game.screenshots = ["http://archive.org/services/img/" + url.match(/metadata\/(.*)\/metadata/)[1]];
 	    	makeDeveloperIfNonExistent(body.creator).then(function(dev) {
 	    		game.developer = dev._id;
+	    		dev.save();
 	    	});
 	    	http.get(url.slice(0, url.length - 9), function(res) {
 	    		var reviews = "";
@@ -78,6 +79,7 @@ function getGame(url) {
 				console.log("maping reviews", review);
 				makeUserIfNonExistent(review.reviewer).then(function(user) {
 					review.author = user._id;
+					user.save();
 					cb(null, {
 						title: review.reviewtitle,
 						text: review.reviewbody,

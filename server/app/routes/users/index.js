@@ -28,7 +28,7 @@ router.get('/', function (req, res, next) {
 
 //GET all developers
 router.get('/developers', function(req, res, next) {
-    User.find({isDeveloper: true})
+    User.find({isDev: true})
     .then(function(developers) {
         res.json(developers);
     })
