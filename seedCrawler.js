@@ -48,9 +48,10 @@ function getGame(url) {
 			    	reviews += chunk;
 			    });
 			    res.on("end", function() {
-			    	reviews = JSON.parse(reviews).reviews;
+			    	reviews = JSON.parse(reviews);
+			    	game.downloadLink = reviews.d1 + "" + reviews.dir + "/" + url.match(/metadata\/msdos_(.*)\/metadata/)[1] + ".zip";
 			    	console.log(game);
-			    	parseReviews(reviews);
+			    	parseReviews(reviews.reviews);
 	    		});
 	    	});
 		});
