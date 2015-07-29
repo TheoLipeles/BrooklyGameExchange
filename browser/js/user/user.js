@@ -44,5 +44,5 @@ app.controller("UserProfileCtrl", function($scope, $stateParams, User){
     })
     .then(null, function(err){
         console.log(err);
-    })
+    });
 });
