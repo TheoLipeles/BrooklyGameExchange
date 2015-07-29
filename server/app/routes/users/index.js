@@ -25,6 +25,18 @@ router.get('/', function (req, res, next) {
     });
 });
 
+router.get('/developers', function(req, res, next) {
+    User.find({isDeveloper: true})
+    .then(function(developers) {
+        res.json(developers);
+    })
+    .then(null, function(e) {
+        var err = new Error('There was an error getting developers', e);
+        err.status = 500;
+        next(err);
+    });
+});
+
 router.get('/:id', function (req, res, next) {
     console.log("this route")
     User.findById(req.params.id)
