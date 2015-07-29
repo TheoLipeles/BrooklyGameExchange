@@ -20,8 +20,8 @@ router.get('/', function (req, res, next) {
         res.json(users);   
     })
     .then(null, function(){
-        var err = new Error('You Ain\'t got No Users!');
-        err.status = 404;
+        var err = new Error('There was an error getting users');
+        err.status = 500;
         next(err);
     });
 });

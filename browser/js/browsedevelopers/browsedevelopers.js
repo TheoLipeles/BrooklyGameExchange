@@ -17,7 +17,7 @@ app.controller('BrowseDevelopersCtrl', function ($scope, $state, User){
 		$scope.Developers = developers;
 	})
 	.catch(function(err){
-		console.log('error',error)
+		console.log('error', err)
 	});
 
 })
