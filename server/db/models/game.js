@@ -1,5 +1,6 @@
 'use strict';
 var mongoose = require('mongoose');
+var User = require('./user');
 
 var schema = new mongoose.Schema({
     title: {
@@ -21,6 +22,17 @@ var schema = new mongoose.Schema({
     genre: String,
     developer: {type: mongoose.Schema.ObjectId, ref: 'User'},
     reviews: [{type: mongoose.Schema.ObjectId, ref: 'Review'}]
+});
+
+schema.pre('save',function(next){
+    User.findByIdAndUpdate(this.developer, {$push: {createdGames: this._id}})
+    .then(function(user){
+        console.log("game added to", user.createdGames);
+        next();
+    })
+    .then(null, function(err){
+        console.log(err);
+    });
 });
 
 // schema.virtual('rating').get(function() {
