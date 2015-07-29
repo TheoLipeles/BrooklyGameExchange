@@ -1,3 +1,1 @@
-<h1>{{User.name}}</h1>
-<img src="{{User.photo}}" width='60px'></img>
-<pre spacing="default">{{User | json}}</pre>
+<single-user ng-repeat="user in users" ui-sref="profile({id: user._id})"></single-user>
