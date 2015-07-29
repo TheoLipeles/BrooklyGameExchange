@@ -1,0 +1,8 @@
+<img src="{{developer.photo}}" width='60px'></img>
+
+
+"a developer"
+
+<pre spacing="default">{developer | json}}</pre>
+
+<single-game-thumb ng-repeat="game in developer.games" ui-sref="agame({id: game._id})"></single-game-thumb>

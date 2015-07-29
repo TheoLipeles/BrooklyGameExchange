@@ -16,7 +16,7 @@ app.controller('GameCtrl', function ($scope,$stateParams,Games){
 		$scope.thisGame = game;
 	})
 	.catch(function(err){
-		console.log('error',error)
+		console.log('error', err)
 	});
 
 

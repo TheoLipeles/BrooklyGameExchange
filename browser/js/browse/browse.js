@@ -21,13 +21,13 @@ app.controller('BrowseCtrl', function ($scope,$state,Games){
 		$scope.gamesList = games;
 	})
 	.catch(function(err){
-		console.log('error',error)
+		console.log('error', err)
 	});
 
 	$scope.game = Games.getOne();
 
 	$scope.sortBy = function(predicate){
-		if (predicate == $scope.sortMethod){
+		if (predicate === $scope.sortMethod){
 			$scope.sortMethod = "-" + predicate;
 		}
 		else{
