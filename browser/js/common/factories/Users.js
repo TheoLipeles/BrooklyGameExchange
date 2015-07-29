@@ -42,7 +42,16 @@ app.factory('User', function ($http) {
 			.then(function(savedReview){
 				return savedReview.data;
 			});
-		}
+		},
+
+		getAllDevelopers: function(){
+			return $http.get('/api/users/developers')
+			.then(function(developers){
+				return developers.data;
+			});
+		},
+
+
 	};
 
 });
