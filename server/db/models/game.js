@@ -19,6 +19,7 @@ var schema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+    downloadLink: String,
     genre: String,
     developer: {type: mongoose.Schema.ObjectId, ref: 'User'},
     reviews: [{type: mongoose.Schema.ObjectId, ref: 'Review'}]
