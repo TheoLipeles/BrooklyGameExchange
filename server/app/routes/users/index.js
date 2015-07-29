@@ -41,7 +41,6 @@ router.get('/developers', function(req, res, next) {
 
 //GET single user
 router.get('/:id', function (req, res, next) {
-    console.log("this route")
     User.findById(req.params.id)
     .then(function(user){
         console.log(user);
@@ -56,9 +55,9 @@ router.get('/:id', function (req, res, next) {
 
 //GET all games created by a single developer
 router.get('/:id/games', function (req, res, next) {
-    User.findById(req.params.id)
-    .then(function(user){
-        res.json(user.createdGames);   
+    Game.find({developer: req.params.id})
+    .then(function(games){
+        res.json(games);   
     })
     .then(null, function(){
         var err = new Error('User Not Found');
@@ -85,13 +84,13 @@ router.get('/:id/reviews', function (req, res, next) {
 router.post('/:id/games', 
     // ensureAuthenticated,
     function (req, res, next) {
-        console.log("new games route")
         req.body.developer = req.params.id;
         Game.create(req.body)
         .then(function(game){
             game.save()
             .then(function(){
-                res.json(201,game);   
+                console.log("new game created");
+                res.json(201, game);   
             });
         })
         .then(null, function(){
@@ -107,7 +106,6 @@ router.post('/:id/reviews',
     function (req, res, next) {
         req.body.author = req.params.id;
         Review.create(req.body)
-
         .then(function(review){
             review.save()
             .then(function(){
