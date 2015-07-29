@@ -13,6 +13,7 @@ var ensureAuthenticated = function (req, res, next) {
     }
 };
 
+//GET all users
 router.get('/', function (req, res, next) {
     User.find({})
     .then(function(users){
@@ -25,6 +26,7 @@ router.get('/', function (req, res, next) {
     });
 });
 
+//GET all developers
 router.get('/developers', function(req, res, next) {
     User.find({isDeveloper: true})
     .then(function(developers) {
@@ -37,6 +39,7 @@ router.get('/developers', function(req, res, next) {
     });
 });
 
+//GET single user
 router.get('/:id', function (req, res, next) {
     console.log("this route")
     User.findById(req.params.id)
@@ -51,6 +54,7 @@ router.get('/:id', function (req, res, next) {
     });
 });
 
+//GET all games created by a single developer
 router.get('/:id/games', function (req, res, next) {
     User.findById(req.params.id)
     .then(function(user){
@@ -63,6 +67,7 @@ router.get('/:id/games', function (req, res, next) {
     });
 });
 
+//GET all reviews created by a single user
 router.get('/:id/reviews', function (req, res, next) {
     User.findById(req.params.id)
     .then(function(user){
@@ -75,9 +80,10 @@ router.get('/:id/reviews', function (req, res, next) {
     });
 });
 
+
+//POST game created by developer
 router.post('/:id/games', 
     // ensureAuthenticated,
-
     function (req, res, next) {
         console.log("new games route")
         req.body.developer = req.params.id;
@@ -95,7 +101,7 @@ router.post('/:id/games',
         });
     });
 
-
+//POST review created by user
 router.post('/:id/reviews',
     // ensureAuthenticated,
     function (req, res, next) {
