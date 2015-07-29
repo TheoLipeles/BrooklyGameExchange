@@ -18,6 +18,7 @@ app.run(function ($rootScope, AuthService, $state) {
 
     // $stateChangeStart is an event fired
     // whenever the process of changing a state begins.
+    $rootScope.showNavBar = true;
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
 
         if (!destinationStateRequiresAuth(toState)) {

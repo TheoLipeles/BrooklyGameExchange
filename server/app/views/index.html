@@ -13,7 +13,8 @@
     <script src="/main.js"></script>
 </head>
 <body ng-app="FullstackGeneratedApp">
-    <navbar></navbar>
+    <!-- i set a $rootscope.showNavBar that we can change. from nick -->
+    <navbar ng-show="showNavBar"></navbar>
     <div id="main" ui-view></div>
 </body>
 </html>
