@@ -40,6 +40,7 @@ function getGame(url) {
 			    	reviews += chunk;
 			    });
 			    res.on("end", function() {
+			    	game.downloadLink = reviews.d1 + reviews.dir + "/" + url.match(/metadata\/(.*)\/metadata/)[1] + ".zip";
 			    	reviews = JSON.parse(reviews).reviews;
 			    	console.log(game);
 			    	parseReviews(reviews);
