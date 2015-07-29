@@ -2,8 +2,11 @@
   box-sizing: border-box;
 }
 
+
 body {
-  background: #fdfdfd;
+  font-family: 'Yantramanav', sans-serif;  background: #004;
+  color: #DDD;
+
 }
 
 @mixin clearfix {

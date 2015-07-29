@@ -8,11 +8,14 @@ single-game-thumb {
   	overflow: hidden;
   	width: 250px;
   	height: 250px;
-  	background: #333;
-  	border-radius: 5px;
+  	background: #400;
+  	margin: 15px;
+  	border: 1px solid #600;
+  	border-radius: 3px;
+  	text-align: center;
 
 	  .littlelabel {
-	  	font-size: 14pt;
+	  	font-size: 12pt;
 	  	padding: 10px;
 	  	color: white;
 	  }
@@ -22,9 +25,12 @@ single-game-thumb {
 	  	display: inline;
 	  	width: 260px;
 	  	height: 80%;
-	  	left: 0px;
+	  	left: -10px;
 	  }
   	
   }
 
+  .individualcontainer:hover{
+  	  border: 1px solid #f00;
+  }
 }
