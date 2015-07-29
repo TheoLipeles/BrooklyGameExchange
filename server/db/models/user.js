@@ -3,6 +3,14 @@ var crypto = require('crypto');
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
+    name: {
+        type: String,
+        default: "BGX-er"
+    },
+    photo: {
+        type: String,
+        default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Video_game_controller_icon_designed_by_Maico_Amorim.svg/1249px-Video_game_controller_icon_designed_by_Maico_Amorim.svg.png'
+    },
     email: {
         type: String,
         required: true
