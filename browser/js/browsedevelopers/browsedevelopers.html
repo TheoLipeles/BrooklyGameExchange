@@ -1,18 +1,4 @@
-<div>
-
-<!-- <p>sort by: <span ng-click="sortBy('name')">name</span></p> -->
-
-<div id = "bigcontainer">
-<single-dev-thumb ng-repeat="developer in Developers" ui-sref="adeveloper({id: developer._id})"></single-dev-thumb>
-</div>
-
-<pre spacing="default">{{Developers | json}}</pre>
-
-
-</div>
-
-
-
+<single-user ng-repeat="user in Developers" ui-sref="profile({id: user._id})"></single-user>
 
 
 
