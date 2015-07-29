@@ -2,8 +2,13 @@
   box-sizing: border-box;
 }
 
+
 body {
-  background: #fdfdfd;
+font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
+  font-weight: light;
+  background: #EEE;
+  color: #222;
+
 }
 
 @mixin clearfix {
@@ -16,7 +21,6 @@ body {
 
 #main {
   padding-top: 60px;
-  width: 1200px;
   margin: 0 auto;
 }
 
