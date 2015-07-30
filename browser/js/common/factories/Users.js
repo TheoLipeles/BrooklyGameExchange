@@ -30,11 +30,14 @@ app.factory('User', function ($http) {
 			});
 		},
 
-		newUser: function(form) {
-			return $http.post('/api/users', form)
+		newUser: function(user) {
+			return $http.post('/api/users/', user)
 			.then(function(user){
-				return user.data;
+				return user.data
 			})
+			.then(null, function(err){
+				console.log("There was an error", err);
+			});
 		},
 
 		postGame: function(id, game) {

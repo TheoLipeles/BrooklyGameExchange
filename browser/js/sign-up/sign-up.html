@@ -1,8 +1,17 @@
-Sign-Up Page
-
-<form class="simple-form">
-    Name: <input type="text" ng-model="user.name" /><br />
-    E-mail: <input type="email" ng-model="user.email" /><br />
-    <input type="button" ng-click="" value="Reset" />
-    <input type="submit" ng-click="" value="Save" />
- </form>
+<div class="centeredWithMaxWidth">
+	<form class="signup-form" ng-submit='newUser(user) && reset()'>
+	    <img src="https://www.insidenewcity.com/images/page/Vector_Mario_Bros1_UP_Mushroom_by_chris_a.jpg">
+	    <h1>Welcome to the Brooklyn Game Exchange</h1>
+	    <img src="https://www.insidenewcity.com/images/page/Vector_Mario_Bros1_UP_Mushroom_by_chris_a.jpg">
+	    <hr>
+	    <h4>Home of fine, handcrafted, retro-digital, artisanal, gluten-free goodness!</h4>
+	    <p>Enter your info below to start gaming!</p>
+	    Name: <input type="text" ng-model="user.name"/>
+	    E-mail: <input type="email" ng-model="user.email"/>
+	    Password: <input type="password" ng-model="user.password"/><br>
+	    Are you a developer? 
+	    <input type="button" value="{{devStatus(user.isDev)}}" ng-click="isDev(user.isDev)"><br>
+	    <input type="button" ng-click="reset()" value="Reset">
+	    <input type="submit" value="Submit">
+	 </form>
+</div>
