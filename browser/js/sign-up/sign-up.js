@@ -2,14 +2,16 @@ app.config(function ($stateProvider) {
     $stateProvider.state('signup', {
         url: '/sign-up',
         templateUrl: '/js/sign-up/sign-up.html',
-        controller: 'signupCtrl',
-        // The following data.authenticate is read by an event listener
-        // that controls access to this state. Refer to app.js.
-        data: {
-            authenticate: true
-        }
+        controller: 'signupCtrl'
     });
+
+    $stateProvider.state('signup.developer', {
+        url: '/developer',
+        templateUrl: '/js/sign-up/sign-up.developer.html',
+        controller: 'signupCtrl'
+    })
 });
 
-app.controller('signupCtrl', function($scope){
+app.controller('signupCtrl', function($scope, Users){
+    Users.newUser();
 });
