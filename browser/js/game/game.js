@@ -9,7 +9,8 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('GameCtrl', function ($scope,$stateParams,Games){
+app.controller('GameCtrl', function ($scope,$stateParams,Games,AuthService,User){
+
 
 	Games.getOne($stateParams.id)
 	.then(function(game){
@@ -20,9 +21,39 @@ app.controller('GameCtrl', function ($scope,$stateParams,Games){
 		console.log('error', err)
 	});
 
+	Games.getReviews($stateParams.id)
+	.then(function(reviews){
+		// console.log(reviews)
+		$scope.reviews = reviews;
+	})
+	.catch(function(err){
+		console.log('error', err)
+	});
+
+	var Review = function(title, game, rating, text, author){
+		this.title = title;
+		this.game = game;
+		this.rating = rating;
+		this.text = text;
+		this.author = author;
+	}
 
 	$scope.postReview = function(){
-		console.log($scope.newReview)
+		//this should be in the resolve of the state but I couldn't get it to work
+		AuthService.getLoggedInUser().then(function(user){
+			// console.log(user)
+			var newRev = new Review(
+			$scope.newReview.title,
+			$scope.thisGame._id,
+			$scope.newReview.rating,
+			$scope.newReview.text,
+			user)
+			$scope.reviews.push(newRev);
+
+			User.postReview(user._id, newRev)
+			
+		})
+
 	};
 
 
