@@ -28,6 +28,10 @@ font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
   display: inline;
 }
 
+.oauth{
+  margin-top: 15px;
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
