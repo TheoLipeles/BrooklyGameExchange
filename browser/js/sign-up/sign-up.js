@@ -9,9 +9,9 @@ app.config(function ($stateProvider) {
         url: '/developer',
         templateUrl: '/js/sign-up/sign-up.developer.html',
         controller: 'signupCtrl'
-    })
+    });
 });
 
-app.controller('signupCtrl', function($scope, Users){
-    Users.newUser();
+app.controller('signupCtrl', function($scope, User){
+    User.newUser();
 });
