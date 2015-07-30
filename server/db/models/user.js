@@ -13,7 +13,8 @@ var schema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -32,6 +33,10 @@ var schema = new mongoose.Schema({
         type: [{type: mongoose.Schema.ObjectId, ref:"Game"}]
     },
     isDev: {
+        type: Boolean,
+        default: false
+    },
+    isAdmin: {
         type: Boolean,
         default: false
     },
