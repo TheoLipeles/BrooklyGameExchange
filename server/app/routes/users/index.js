@@ -112,8 +112,8 @@ router.post('/:id/reviews',
                 res.json(201,review);   
             });
         })
-        .then(null, function(){
-            var err = new Error('Error: Review Not Created');
+        .then(null, function(err){
+            console.log(err);
             err.status = 500;
             next(err);
         });

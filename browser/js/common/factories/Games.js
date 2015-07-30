@@ -13,6 +13,14 @@ app.factory('Games', function ($http) {
 			.then(function(game){
 				return game.data
 			});
+		},
+
+		getReviews: function(id){
+			return $http.get('/api/games/'+id+'/reviews')
+			.then(function(review){
+				console.log(review.data)
+				return review.data
+			});
 		}
 
 

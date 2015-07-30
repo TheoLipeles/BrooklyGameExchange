@@ -1,0 +1,40 @@
+#topHalf{
+	display: block;
+}
+
+#reviewsForm{
+	display: block;
+	clear: both;
+	
+	#Title{
+		width: 40%;
+	}
+	#newReview{
+		height: 100px;
+		width: 100%;
+	}
+}
+
+#reviews{
+	display: block;
+}
+
+#gameHolder{
+	padding: 10px;
+	display: inline-block;
+	float: left;
+	width: 70%;
+	height: auto;
+}
+
+#moreInfo{
+	float: right;
+	display: inline-block;
+	width: 30%;
+	height: 500px;
+	background: red;
+}
+
+.thinner{
+	width: 70%;
+}
