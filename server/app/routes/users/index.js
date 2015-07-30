@@ -13,21 +13,35 @@ var ensureAuthenticated = function (req, res, next) {
     }
 };
 
+//GET all users
 router.get('/', function (req, res, next) {
     User.find({})
     .then(function(users){
         res.json(users);   
     })
     .then(null, function(){
-        var err = new Error('You Ain\'t got No Users!');
-        err.status = 404;
+        var err = new Error('There was an error getting users');
+        err.status = 500;
         next(err);
     });
 });
 
+//GET all developers
+router.get('/developers', function(req, res, next) {
+    User.find({isDev: true})
+    .then(function(developers) {
+        res.json(developers);
+    })
+    .then(null, function(e) {
+        var err = new Error('There was an error getting developers', e);
+        err.status = 500;
+        next(err);
+    });
+});
+
+//GET single user
 router.get('/:id', function (req, res, next) {
-    console.log("this route")
-    User.findById(req.params.id)
+    User.findById(req.params.id).populate("createdGames").exec()
     .then(function(user){
         console.log(user);
         res.json(user);   
@@ -39,10 +53,11 @@ router.get('/:id', function (req, res, next) {
     });
 });
 
+//GET all games created by a single developer
 router.get('/:id/games', function (req, res, next) {
-    User.findById(req.params.id)
-    .then(function(user){
-        res.json(user.createdGames);   
+    Game.find({developer: req.params.id})
+    .then(function(games){
+        res.json(games);   
     })
     .then(null, function(){
         var err = new Error('User Not Found');
@@ -51,8 +66,9 @@ router.get('/:id/games', function (req, res, next) {
     });
 });
 
+//GET all reviews created by a single user
 router.get('/:id/reviews', function (req, res, next) {
-    User.findById(req.params.id)
+    User.findById(req.params.id).populate("reviews").exec()
     .then(function(user){
         res.json(user.reviews);   
     })
@@ -63,17 +79,18 @@ router.get('/:id/reviews', function (req, res, next) {
     });
 });
 
+
+//POST game created by developer
 router.post('/:id/games', 
     // ensureAuthenticated,
-
     function (req, res, next) {
-        console.log("new games route")
         req.body.developer = req.params.id;
         Game.create(req.body)
         .then(function(game){
             game.save()
             .then(function(){
-                res.json(201,game);   
+                console.log("new game created");
+                res.json(201, game);   
             });
         })
         .then(null, function(){
@@ -83,13 +100,12 @@ router.post('/:id/games',
         });
     });
 
-
+//POST review created by user
 router.post('/:id/reviews',
     // ensureAuthenticated,
     function (req, res, next) {
         req.body.author = req.params.id;
         Review.create(req.body)
-
         .then(function(review){
             review.save()
             .then(function(){

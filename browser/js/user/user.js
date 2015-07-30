@@ -9,7 +9,7 @@ app.config(function ($stateProvider) {
             authenticate: true
         }
     });
-    
+
     $stateProvider.state('profile', {
         url: '/user/:id',
         templateUrl: '/js/user/profile.html',
@@ -32,7 +32,15 @@ app.controller("UserProfileCtrl", function($scope, $stateParams, User){
     User.getOne($stateParams.id)
     .then(function(user){
         $scope.user = user;
-        $scope.id = $stateParams.id
+        $scope.id = $stateParams.id;
+    })
+    .then(null, function(err){
+        console.log(err);
+    });
+
+    User.getGames($stateParams.id)
+    .then(function(games){
+        $scope.games = games;
     })
     .then(null, function(err){
         console.log(err);

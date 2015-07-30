@@ -30,6 +30,13 @@ app.factory('User', function ($http) {
 			});
 		},
 
+		newUser: function(form) {
+			return $http.post('/api/users', form)
+			.then(function(user){
+				return user.data;
+			})
+		},
+
 		postGame: function(id, game) {
 			return $http.post('/api/users/'+ id + '/games', game)
 			.then(function(savedGame){
@@ -42,7 +49,16 @@ app.factory('User', function ($http) {
 			.then(function(savedReview){
 				return savedReview.data;
 			});
-		}
+		},
+
+		getAllDevelopers: function(){
+			return $http.get('/api/users/developers')
+			.then(function(developers){
+				return developers.data;
+			});
+		},
+
+
 	};
 
 });
