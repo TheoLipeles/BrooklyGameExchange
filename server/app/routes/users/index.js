@@ -41,7 +41,7 @@ router.get('/developers', function(req, res, next) {
 
 //GET single user
 router.get('/:id', function (req, res, next) {
-    User.findById(req.params.id)
+    User.findById(req.params.id).populate("createdGames").exec()
     .then(function(user){
         console.log(user);
         res.json(user);   
@@ -68,7 +68,7 @@ router.get('/:id/games', function (req, res, next) {
 
 //GET all reviews created by a single user
 router.get('/:id/reviews', function (req, res, next) {
-    User.findById(req.params.id)
+    User.findById(req.params.id).populate("reviews").exec()
     .then(function(user){
         res.json(user.reviews);   
     })

@@ -15,5 +15,6 @@ app.factory('Games', function ($http) {
 			});
 		}
 
+
 		}
 })

@@ -38,11 +38,11 @@ app.controller("UserProfileCtrl", function($scope, $stateParams, User){
         console.log(err);
     });
 
-    User.getGames($stateParams.id)
-    .then(function(games){
-        $scope.games = games;
-    })
-    .then(null, function(err){
-        console.log(err);
-    })
+    // User.getGames($stateParams.id)
+    // .then(function(games){
+    //     $scope.games = games;
+    // })
+    // .then(null, function(err){
+    //     console.log(err);
+    // })
 });
