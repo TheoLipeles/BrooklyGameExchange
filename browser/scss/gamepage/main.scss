@@ -1,0 +1,32 @@
+#topHalf{
+	display: block;
+}
+
+#reviewsForm{
+	display: block;
+	clear: both;
+}
+
+#reviews{
+	display: block;
+}
+
+#gameHolder{
+	padding: 10px;
+	display: inline-block;
+	float: left;
+	width: 70%;
+	height: auto;
+}
+
+#moreInfo{
+	float: right;
+	display: inline-block;
+	width: 30%;
+	height: 500px;
+	background: red;
+}
+
+.thinner{
+	width: 70%;
+}

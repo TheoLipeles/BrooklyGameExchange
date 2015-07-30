@@ -48,7 +48,7 @@ app.controller('GameCtrl', function ($scope,$stateParams,Games,AuthService,User)
 			$scope.newReview.rating,
 			$scope.newReview.text,
 			user)
-			$scope.reviews.push(newRev);
+			$scope.reviews.unshift(newRev);
 
 			User.postReview(user._id, newRev)
 			
