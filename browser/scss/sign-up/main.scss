@@ -1,0 +1,23 @@
+.signup-form {
+	h1 {
+		display: inline;
+	}
+	img {
+
+		max-height: 40px;
+	}
+	hr{
+		border: 1px solid black;
+	}
+	input {
+		margin: 5px;
+		border-radius: 5px;
+	}
+	button {
+		margin: 5px;
+		border-radius: 5px;
+		min-height: 20px;
+		min-width: 30px;
+		background-color: gainsboro;
+	}
+}

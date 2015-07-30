@@ -15,6 +15,14 @@ app.factory('Games', function ($http, AuthService) {
 			});
 		},
 
+		getReviews: function(id){
+			return $http.get('/api/games/'+id+'/reviews')
+			.then(function(review){
+				console.log(review.data)
+				return review.data
+			});
+		},
+
 		addToCart: function(id, price) {
 			return AuthService.getLoggedInUser(false)
 			.then(function(user) {
