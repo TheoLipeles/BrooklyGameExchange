@@ -1,7 +1,7 @@
 app.config(function ($stateProvider) {
 
-    $stateProvider.state('browsedevelopers', {
-        url: '/browsedevelopers',
+    $stateProvider.state('developers', {
+        url: '/developers',
         templateUrl: 'js/browsedevelopers/browsedevelopers.html',
         controller: 'BrowseDevelopersCtrl'
     });
