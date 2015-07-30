@@ -5,6 +5,14 @@
 #reviewsForm{
 	display: block;
 	clear: both;
+	
+	#Title{
+		width: 40%;
+	}
+	#newReview{
+		height: 100px;
+		width: 100%;
+	}
 }
 
 #reviews{
