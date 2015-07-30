@@ -48,8 +48,10 @@ app.factory('User', function ($http) {
 		},
 
 		postReview: function(id, review) {
+			console.log("posting from",id,"with",review)
 			return $http.post('/api/users/'+ id + '/reviews', review)
 			.then(function(savedReview){
+				console.log("review saved:",savedReview)
 				return savedReview.data;
 			});
 		},

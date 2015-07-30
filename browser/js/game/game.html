@@ -1,17 +1,32 @@
-<div class="centeredWithMaxWidth" controller="GameCtrl">
-<h1>{{thisGame.title}}</h1>
-<img ng-repeat="screenshot in thisGame.screenshots" src="{{screenshot}}"></img>
+<div class="centeredWithMaxWidth thinner" controller="GameCtrl">
+	<div id="topHalf">
+		<div id="gameHolder">
+			<h1>{{thisGame.title}}</h1>
+			A game by {{thisGame.developer.name}}</br>
+			<img ng-repeat="screenshot in thisGame.screenshots" src="{{screenshot}}"></img></br>
+			{{thisGame.description}}
+		</div>
+		<div id="moreInfo">
+			BUY THIS GAME?
 
+			MORE LIKE THIS?
+		</div>
+	</div>
 </br>
-<!-- <p ng-bind-html="descriptionHTML"></p> -->
 
 
 
-<form name="reviewForm" ng-submit="postReview()">
-	<input type="textarea" id="newReview" ng-model="newReview.title"></input>
-	<input type="textarea" id="newReview" ng-model="newReview.text"></input>
-	<input type="textarea" id="newReview" ng-model="newReview.rating"></input>
-	<input type="submit"></input>
+
+<form name="reviewForm" ng-submit="postReview()" id="reviewsForm">
+	Write a review: </br>
+	<input type="textarea" width="100" id="Title" ng-model="newReview.title" placeholder="Title (What an Experience!)"></input></br>
+	<textarea size="30" id="newReview" ng-model="newReview.text" placeholder="This game was pretty alright. I liked the part where my character did that thing"></textarea></br>
+	<input type="number" ng-model="newReview.rating" min="0" max="5" integer placeholder="3">/5
+	<span ng-show="reviewForm.rating.$error.integer">The value is not a valid integer!</span>
+</input>
+<input type="submit"></input>
 </form>
-<pre spacing="default">{{thisGame | json}}</pre>
+<div id="reviews">
+	<single-review ng-repeat="review in reviews"></single-review>
+</div>
 </div>
