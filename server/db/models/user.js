@@ -29,7 +29,8 @@ var schema = new mongoose.Schema({
         type: [{type: mongoose.Schema.ObjectId, ref:"Review"}]
     },
     cart: {
-        type: [{type: mongoose.Schema.ObjectId, ref:"Game"}]
+        type: [{
+            game: {type: mongoose.Schema.ObjectId, ref:"Game"}, price: {type: Number}}]
     },
     isDev: {
         type: Boolean,

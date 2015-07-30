@@ -1,17 +1,35 @@
 <div class="centeredWithMaxWidth" controller="GameCtrl">
-<h1>{{thisGame.title}}</h1>
-<img ng-repeat="screenshot in thisGame.screenshots" src="{{screenshot}}"></img>
+    <h1>{{thisGame.title}}</h1>
+    <img ng-repeat="screenshot in thisGame.screenshots" src="{{screenshot}}"></img>
 
-</br>
-<!-- <p ng-bind-html="descriptionHTML"></p> -->
+    </br>
+
+    <div ng-controller="ModalCtrl">
+        <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+        <input type="number" id="game" ng-model="game.price"></input>
+
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+        <button class="btn btn-primary" ng-click="ok()">Add To Cart</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+        </script>
+
+        <button class="btn btn-default" ng-click="open()">Purchase Game</button>
+    </div>
 
 
 
-<form name="reviewForm" ng-submit="postReview()">
-	<input type="textarea" id="newReview" ng-model="newReview.title"></input>
-	<input type="textarea" id="newReview" ng-model="newReview.text"></input>
-	<input type="textarea" id="newReview" ng-model="newReview.rating"></input>
-	<input type="submit"></input>
-</form>
-<pre spacing="default">{{thisGame | json}}</pre>
+
+
+    <form name="reviewForm" ng-submit="postReview()">
+    	<input type="textarea" id="newReview" ng-model="newReview.title"></input>
+    	<input type="textarea" id="newReview" ng-model="newReview.text"></input>
+    	<input type="textarea" id="newReview" ng-model="newReview.rating"></input>
+    	<input type="submit"></input>
+    </form>
+    <pre spacing="default">{{thisGame | json}}</pre>
 </div>

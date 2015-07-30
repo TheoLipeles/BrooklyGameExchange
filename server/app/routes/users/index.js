@@ -119,4 +119,21 @@ router.post('/:id/reviews',
         });
     });
 
+//post game to cart
+router.post('/:id/cart/',
+    function (req, res, next) {
+        User.findByIdAndUpdate(req.params.id, {$addToSet: {cart: {game: req.body.id, price: parseInt(req.body.price)} } })
+        .then(function() {
+            res.sendStatus(201);
+        })
+        .then(null, function(err){
+            next(err);
+        });
+    });
+
+
+
+
+
+
 module.exports = router;
