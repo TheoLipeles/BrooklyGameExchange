@@ -8,7 +8,7 @@ navbar {
   .container {
     width: 91%;
     max-width: 1340px;
-    padding-top: 20px;
+    padding-top: 0px;
   }
 
   fullstack-logo {
@@ -57,4 +57,8 @@ navbar {
     }
   }
 
+}
+
+.navbar {
+  margin-bottom: 0px;
 }
