@@ -1,3 +1,20 @@
+.background {
+	background-attachment: fixed;
+	margin-top: -60px;
+	height: 100vh;
+	width: 100vw;
+	background-image: url("http://www.roadtovr.com/wp-content/uploads/2014/11/newriftarcade-oculus-rift-arcande-4.jpg");
+	background-size: cover;
+}
+
+.container-login {
+  width: 30%;
+  margin: 0 auto;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: #ddd;
+}
+
 #login-form {
   width: 60%;
   margin: 0 auto;
