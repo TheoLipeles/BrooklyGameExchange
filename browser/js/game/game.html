@@ -18,7 +18,6 @@
     <script type="text/ng-template" id="myModalContent.html">
     <div class="modal-header">
     <input type="number" id="game" ng-model="game.price"></input>
-
     </div>
     <div class="modal-body">
     </div>
@@ -30,6 +29,7 @@
     <button class="btn btn-default" ng-click="open()">Purchase Game</button>
 </div>    
 
+
 <form name="reviewForm" ng-submit="postReview()" id="reviewsForm">
 	Write a review: </br>
 	<input type="textarea" width="100" id="Title" ng-model="newReview.title" placeholder="Title (What an Experience!)"></input></br>
@@ -40,6 +40,6 @@
 <input type="submit"></input>
 </form>
 <div id="reviews">
-	<single-review ng-repeat="review in reviews"></single-review>
+	<single-review ng-repeat="review in reviews | reverse"></single-review>
 </div>
 </div>
