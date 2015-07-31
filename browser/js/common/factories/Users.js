@@ -32,8 +32,8 @@ app.factory('User', function ($http) {
 
 		newUser: function(user) {
 			return $http.post('/api/users/', user)
-			.then(function(user){
-				return user.data;
+			.then(function(newUser){
+				return newUser.data;
 			})
 			.then(null, function(err){
 				console.log("There was an error", err);
@@ -43,6 +43,7 @@ app.factory('User', function ($http) {
 		postGame: function(id, game) {
 			return $http.post('/api/users/'+ id + '/games', game)
 			.then(function(savedGame){
+				console.log(savedGame)
 				return savedGame.data;
 			});
 		},

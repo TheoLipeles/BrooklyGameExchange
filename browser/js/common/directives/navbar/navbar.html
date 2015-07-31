@@ -10,7 +10,7 @@
         </ul>
         <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
         <div ng-show="user" class="welcome">
-            <span>Welcome, {{ user.name }}!</span>
+            <i class="glyphicon glyphicon-shopping-cart"  ui-sref="cart({id: user._id})"></i>
             <a ng-click="logout()">Logout</a>
         </div>
     </div>
