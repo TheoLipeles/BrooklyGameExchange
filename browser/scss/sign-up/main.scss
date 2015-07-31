@@ -1,23 +1,41 @@
 .signup-form {
+	width: 60%;
+  	margin: 0 auto;
+	
 	h1 {
 		display: inline;
 	}
-	img {
 
+	img {
 		max-height: 40px;
 	}
+
 	hr{
 		border: 1px solid black;
 	}
+
 	input {
 		margin: 5px;
+		margin-bottom:2%;
 		border-radius: 5px;
 	}
-	button {
-		margin: 5px;
-		border-radius: 5px;
-		min-height: 20px;
-		min-width: 30px;
-		background-color: gainsboro;
+
+	.btn{
+		margin-bottom: 1%;
 	}
+
+	#infoBad {
+		color: red;
+	}
+
+	#infoGood {
+		color: green;
+	}
+
+}
+
+.oauth {
+	display: block;
+	width: 60%;
+  	margin: 0 auto;
 }

@@ -1,4 +1,16 @@
 #login-form {
   width: 60%;
   margin: 0 auto;
+
+	hr{
+		border: 1px solid black;
+	}
+
+	#infoBad {
+		color: red;
+	}
+
+	#infoGood {
+		color: green;
+	}
 }
