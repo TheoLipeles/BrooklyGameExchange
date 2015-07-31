@@ -38,7 +38,7 @@ function getGame(url) {
 	    	game.title = body.title;
 	    	game.description = body.description;
 	    	if (body.description) {
-		    	var possibleGenre = body.description.match(/<b>Genre<\/b>\s*(\w*)\s<\/p>/);
+		    	var possibleGenre = body.description.match(/<b>Genre<\/b>\s*(\w*)\s*<\/p>/);
 		    	if (possibleGenre) {
 			    	game.genre = possibleGenre[1];
 			    	console.log(game.genre);

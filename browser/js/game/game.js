@@ -11,13 +11,13 @@ app.config(function ($stateProvider) {
 
 app.controller('GameCtrl', function ($scope,$stateParams,Games,AuthService,User){
 
-	$scope.newReview = {}
+	$scope.newReview = {};
 
 	Games.getOne($stateParams.id)
 	.then(function(game){
 		$scope.thisGame = game;
 		$scope.descriptionHTML = $scope.thisGame.description;
-		$scope.newReview.game = game._id
+		$scope.newReview.game = game._id;
 	})
 	.catch(function(err){
 		console.log('error', err);
@@ -31,7 +31,7 @@ app.controller('GameCtrl', function ($scope,$stateParams,Games,AuthService,User)
 			$scope.reviews = reviews;
 		})
 		.catch(function(err){
-			console.log('error', err)
+			console.log('error', err);
 		});
 	};
 	$scope.updateReviews();
