@@ -1,6 +1,7 @@
-<div class="centeredWithMaxWidth">
+<div class="centeredWithMaxWidth thinner">
     <h1>{{name}}'s Cart</h1>
-    <div class="container" ng-repeat="item in cart">{{item.price}}</div>
+
+    <cartitem ng-repeat="item in cart"></cartitem>
+
     </br>
     <pre>Your Cart Total is {{getTotal()}}</pre>
-</div>
