@@ -8,7 +8,15 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('CartCtrl', function ($scope, $stateParams){
+app.controller('CartCtrl', function ($scope, $stateParams, User){
+
+	User.getAll()
+    .then(function(users){
+        $scope.users = users;
+    })
+    .then(null, function(err){
+        console.log(err);
+    });
 
 	// Users.getOne($stateParams.id)
 	// .then(function(user) {
@@ -18,4 +26,4 @@ app.controller('CartCtrl', function ($scope, $stateParams){
 
 
 
-})
+});

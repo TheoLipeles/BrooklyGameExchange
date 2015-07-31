@@ -18,7 +18,7 @@ app.controller('GameCtrl', function ($scope,$stateParams,Games,AuthService,User)
 		$scope.descriptionHTML = $scope.thisGame.description;
 	})
 	.catch(function(err){
-		console.log('error', err)
+		console.log('error', err);
 	});
 
 	Games.getReviews($stateParams.id)
@@ -27,7 +27,7 @@ app.controller('GameCtrl', function ($scope,$stateParams,Games,AuthService,User)
 		$scope.reviews = reviews;
 	})
 	.catch(function(err){
-		console.log('error', err)
+		console.log('error', err);
 	});
 
 	var Review = function(title, game, rating, text, author){
@@ -36,7 +36,7 @@ app.controller('GameCtrl', function ($scope,$stateParams,Games,AuthService,User)
 		this.rating = rating;
 		this.text = text;
 		this.author = author;
-	}
+	};
 
 	$scope.postReview = function(){
 		//this should be in the resolve of the state but I couldn't get it to work
@@ -47,16 +47,16 @@ app.controller('GameCtrl', function ($scope,$stateParams,Games,AuthService,User)
 			$scope.thisGame._id,
 			$scope.newReview.rating,
 			$scope.newReview.text,
-			user)
+			user);
 			$scope.reviews.unshift(newRev);
 
-			User.postReview(user._id, newRev)
+			User.postReview(user._id, newRev);
 			
-		})
+		});
 
 	};
 
-})
+});
 
 app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, Games, $stateParams) {
 	$scope.game = {};
@@ -67,7 +67,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, Games, $st
 		$scope.game.price = $scope.thisGame.minPrice;
 	})
 	.catch(function(err){
-		console.log('error', err)
+		console.log('error', err);
 	});
 
 
