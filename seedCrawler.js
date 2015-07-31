@@ -37,6 +37,13 @@ function getGame(url) {
 	    	body = JSON.parse(body).result;
 	    	game.title = body.title;
 	    	game.description = body.description;
+	    	if (body.description) {
+		    	var possibleGenre = body.description.match(/<b>Genre<\/b>\s*(\w*)\s<\/p>/);
+		    	if (possibleGenre) {
+			    	game.genre = possibleGenre[1];
+			    	console.log(game.genre);
+		    	}
+	    	}
 	    	game.screenshots = ["http://archive.org/services/img/" + url.match(/metadata\/(.*)\/metadata/)[1]];
 	    	makeDeveloperIfNonExistent(body.creator).then(function(dev) {
 	    		game.developer = dev._id;
@@ -50,7 +57,6 @@ function getGame(url) {
 			    res.on("end", function() {
 			    	reviews = JSON.parse(reviews);
 			    	game.downloadLink = reviews.d1 + "" + reviews.dir + "/" + url.match(/metadata\/msdos_(.*)\/metadata/)[1] + ".zip";
-			    	console.log(game);
 			    	parseReviews(reviews.reviews);
 	    		});
 	    	});
@@ -70,7 +76,7 @@ function getGame(url) {
 	var makeUserIfNonExistent = function(name) {
 		return User.findById({name: name})
 			.then(function(dev) {
-				console.log("Developer exists", name);
+				console.log("User exists", name);
 			})
 			.then(null, function() {
 				return User.create({name: name, email: faker.internet.email(), password: "supersecurefakepassword"});
@@ -85,7 +91,6 @@ function getGame(url) {
 	var parseReviews = function(reviews) {
 		if (reviews) {
 			async.map(reviews.slice(0, 1), function(review, cb) {
-				console.log("maping reviews", review);
 				makeUserIfNonExistent(review.reviewer).then(function(user) {
 					review.author = user._id;
 					user.save();
@@ -108,12 +113,10 @@ function getGame(url) {
 				};
 
 				Review.create(reviews).then(function(reviews) {
-					console.log("created reviews", reviews);
 					for (var review = 0; review < reviews.length; review++) {
 						var currentReview = reviews[review];
 						reviewsQueue.push(currentReview, function() {
 							reviewIds.push(currentReview._id);
-							console.log("saving review", currentReview);
 						});
 					}
 				});
@@ -123,7 +126,6 @@ function getGame(url) {
 
 	var done = function(game) {
 		Game.create(game).then(function(game) {
-			console.log("game", game);
 			User.findByIdAndUpdate(game.developer, {$push: {createdGames: game._id}}).then(function(){console.log("UPDATED DEV");});
 			game.reviews.map(function(reviewId) {
 				Review.findByIdAndUpdate(reviewId, {$set: {game: game._id}}).then(function(){console.log("UPDATED REVIEW");});

@@ -14,8 +14,21 @@
 	</div>
 </br>
 
+<div ng-controller="ModalCtrl">
+    <script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+    <input type="number" id="game" ng-model="game.price"></input>
 
-
+    </div>
+    <div class="modal-body">
+    </div>
+    <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">Add To Cart</button>
+    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+    </script>
+    <button class="btn btn-default" ng-click="open()">Purchase Game</button>
+</div>    
 
 <form name="reviewForm" ng-submit="postReview()" id="reviewsForm">
 	Write a review: </br>
