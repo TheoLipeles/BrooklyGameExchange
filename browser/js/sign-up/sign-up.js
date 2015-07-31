@@ -10,12 +10,12 @@ app.controller('signupCtrl', function($scope, User, AuthService, $state){
     $scope.user = {};
 
     $scope.isDev = function(dev){
-        $scope.user.isDev = !dev
+        $scope.user.isDev = !dev;
     };
 
     $scope.devStatus = function(){
-        if ($scope.user.isDev) return "Yes!";
-        else return "No!";
+        if ($scope.user.isDev) return "Yes! I am a Developer!";
+        else return "No! I am a Gamer!";
     };
 
     $scope.reset = function() {
@@ -25,12 +25,19 @@ app.controller('signupCtrl', function($scope, User, AuthService, $state){
             password: null,
             isDev: false
         };
-    }
+    };
 
     $scope.newUser = function(user) {
         User.newUser(user)
         .then(function(newUser){
-            $state.go('login', {'login.email': newUser.email});
+            return AuthService.login({email: user.email, password: user.password});
         })
-    }
+        .then(function (data) {
+            $state.go('profile', {id: data._id});
+        })
+        .catch(function () {
+            $scope.error = 'Invalid login credentials.';
+        });
+    };
 });
+// $state.go('login', {'login.email': newUser.email});
