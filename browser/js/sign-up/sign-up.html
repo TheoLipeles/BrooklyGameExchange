@@ -1,21 +1,22 @@
-<div class="centeredWithMaxWidth">
-	<form name="form" class="signup-form" ng-submit='newUser(user) && reset()'>
-	    <h1>Welcome to the Brooklyn Game Exchange</h1>
-	    <img src="https://www.insidenewcity.com/images/page/Vector_Mario_Bros1_UP_Mushroom_by_chris_a.jpg">
-	    <hr>
-	    <h4>Home of fine, handcrafted, retro-digital, artisanal, gluten-free goodness!</h4>
-	    <p>Enter your info below to start gaming!</p>
-	    Name: <input type="text" ng-model="user.name" required>
-	    E-mail: <input type="email" ng-model="user.email" required>
-	    Password: <input type="password" ng-model="user.password" required><br>
-	    Are you a developer? 
-	    <input type="button" value="{{devStatus(user.isDev)}}" ng-click="isDev(user.isDev)"><br>
-	    <input type="button" ng-click="reset()" value="Clear Form">
-	    <input ng-show="form.$valid" type="submit" value="Submit">
-	 </form>
-    <div class="oauth">
-		<p><oauth-button provider-name="Google"></oauth-button></p>
-		<p><oauth-button provider-name="Twitter"></oauth-button></p>
-		<p><oauth-button provider-name="Facebook"></oauth-button></p>
-	</div>
+<form novalidate name="form" class="signup-form" ng-submit='newUser(user) && reset()'>
+    <h1>Welcome to the Brooklyn Game Exchange</h1>
+    <img src="https://www.insidenewcity.com/images/page/Vector_Mario_Bros1_UP_Mushroom_by_chris_a.jpg">
+    <hr>
+    <h4>Home of fine, handcrafted, retro-digital, artisanal, gluten-free goodness!</h4>
+    <p>
+    	<span id="infoBad" ng-show="form.$invalid">Enter your info below to start gaming!</span>
+    	<span id="infoGood" ng-show="form.$valid">Press Submit When Ready!</span>
+    </p>
+    Name: <input type="text" ng-model="user.name" placeholder="e.g. your name"required>
+    E-mail: <input type="email" ng-model="user.email" placeholder="email" required>
+    Password: <input type="password" ng-model="user.password" placeholder="must be at least 8 chars."required><br>
+    Are you a developer? 
+    <button type="button" class="btn btn-primary" ng-click="isDev(user.isDev)">{{devStatus(user.isDev)}}</button><br>
+    <button type="button" class="btn btn-danger" ng-click="reset()">Clear Form</button>
+    <button type="submit" class="btn btn-success" ng-show="form.$valid" type="submit">Submit</button>
+ </form>
+<div class="oauth">
+	<p><oauth-button provider-name="Google"></oauth-button></p>
+	<p><oauth-button provider-name="Twitter"></oauth-button></p>
+	<p><oauth-button provider-name="Facebook"></oauth-button></p>
 </div>
