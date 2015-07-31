@@ -11,7 +11,6 @@ app.config(function ($stateProvider) {
 
 app.controller('GameCtrl', function ($scope,$stateParams,Games,AuthService,User){
 
-
 	Games.getOne($stateParams.id)
 	.then(function(game){
 		$scope.thisGame = game;
