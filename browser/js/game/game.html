@@ -16,7 +16,6 @@
 
 
 
-
 <form name="reviewForm" ng-submit="postReview()" id="reviewsForm">
 	Write a review: </br>
 	<input type="textarea" width="100" id="Title" ng-model="newReview.title" placeholder="Title (What an Experience!)"></input></br>
@@ -27,6 +26,6 @@
 <input type="submit"></input>
 </form>
 <div id="reviews">
-	<single-review ng-repeat="review in reviews"></single-review>
+	<single-review ng-repeat="review in reviews | reverse"></single-review>
 </div>
 </div>

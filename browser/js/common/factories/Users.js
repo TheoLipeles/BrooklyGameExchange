@@ -43,6 +43,7 @@ app.factory('User', function ($http) {
 		postGame: function(id, game) {
 			return $http.post('/api/users/'+ id + '/games', game)
 			.then(function(savedGame){
+				console.log(savedGame)
 				return savedGame.data;
 			});
 		},
