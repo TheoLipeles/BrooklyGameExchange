@@ -39,13 +39,13 @@ router.get('/developers', function(req, res, next) {
 
 //GET single user
 router.get('/:id', function (req, res, next) {
-    User.findById(req.params.id).populate("createdGames").exec()
+    User.findById(req.params.id).populate("createdGames", "reviews", "Game").exec()
     .then(function(user){
         console.log(user);
         res.json(user);   
     })
     .then(null, function(err){
-        console.log(err)
+        console.log(err);
         next(err);
     });
 });
