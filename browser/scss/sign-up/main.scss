@@ -1,48 +1,48 @@
 .container-sign-up {
-  width: 60%;
+  width: 65%;
+  length: 55%;
   margin: 0 auto;
+  margin-top: 5%;
   border: 1px solid black;
   border-radius: 10px;
   background-color: #ddd;
-}
+  
+	form {
+	  margin-left: 10%;
+	  margin-right: 10%;  
+	  width: 80%;
+	  padding-top: 5%;
+	  padding-bottom: 5%;
 
-.signup-form {
-	margin: 0 auto;
-	width: 60%;
-	
-	h1 {
-		display: inline;
+	  img {
+	  	max-height: 40px;
+	  }
+	  
+	  h1 {
+	    display: inline;
+	  }
+
+	  hr{
+	    border: 1px solid black;
+	  }
+
+	  input {
+	    margin: 5px;
+	    margin-bottom:2%;
+	    border-radius: 5px;
+	  }
+
+	  .btn{
+	    margin-bottom: 1%;
+	    padding: 0.5%;
+	  }
+
+	  #infoBad {
+	    color: red;
+	  }
+
+	  #infoGood {
+	    color: green;
+	  }
 	}
-
-	img {
-		max-height: 40px;
-	}
-
-	hr{
-		border: 1px solid black;
-	}
-
-	input {
-		margin: 5px;
-		margin-bottom:2%;
-		border-radius: 5px;
-	}
-
-	.btn{
-		margin-bottom: 1%;
-		padding: 0.5%;
-	}
-
-	#infoBad {
-		color: red;
-	}
-
-	#infoGood {
-		color: green;
-	}
-}
-
-.oauth {
-	width: 100%;
-	margin: 0 auto;
 }

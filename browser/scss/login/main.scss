@@ -1,37 +1,43 @@
-.background {
-	background-attachment: fixed;
-	margin-top: -60px;
-	height: 100vh;
-	width: 100vw;
-	background-image: url("http://www.roadtovr.com/wp-content/uploads/2014/11/newriftarcade-oculus-rift-arcande-4.jpg");
-	background-size: cover;
-}
-
 .container-login {
-  width: 30%;
+  width: 40%;
   margin: 0 auto;
+  margin-top: 5%;
   border: 1px solid black;
   border-radius: 10px;
   background-color: #ddd;
-}
 
-#login-form {
-  width: 60%;
-  margin: 0 auto;
+	form {
+	  margin-left: 10%;
+	  margin-right: 10%;  
+	  width: 80%;
+	  padding-top: 5%;
+	  padding-bottom: 5%;
+	  
+	  h1 {
+	    display: inline;
+	  }
 
-	hr{
-		border: 1px solid black;
-	}
+	  hr{
+	    border: 1px solid black;
+	  }
 
-	#infoBad {
-		color: red;
-	}
+	  input {
+	    margin: 5px;
+	    margin-bottom:2%;
+	    border-radius: 5px;
+	  }
 
-	#infoGood {
-		color: green;
-	}
+	  .btn{
+	    margin-bottom: 1%;
+	    padding: 0.5%;
+	  }
 
-	.btn {
-		padding: 0;
+	  #infoBad {
+	    color: red;
+	  }
+
+	  #infoGood {
+	    color: green;
+	  }
 	}
 }
