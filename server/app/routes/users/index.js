@@ -39,13 +39,13 @@ router.get('/developers', function(req, res, next) {
 
 //GET single user
 router.get('/:id', function (req, res, next) {
-    User.findById(req.params.id).populate("createdGames").exec()
+    User.findById(req.params.id).populate("createdGames", "reviews", "Game").exec()
     .then(function(user){
         console.log(user);
         res.json(user);   
     })
     .then(null, function(err){
-        console.log(err)
+        console.log(err);
         next(err);
     });
 });
@@ -122,5 +122,22 @@ router.post('/:id/reviews',
         });
     }
 );
+
+//post game to cart
+router.post('/:id/cart/',
+    function (req, res, next) {
+        User.findByIdAndUpdate(req.params.id, {$addToSet: {cart: {game: req.body.id, price: parseInt(req.body.price)} } })
+        .then(function() {
+            res.sendStatus(201);
+        })
+        .then(null, function(err){
+            next(err);
+        });
+    });
+
+
+
+
+
 
 module.exports = router;

@@ -1,0 +1,20 @@
+<div class="centeredWithMaxWidth">
+{{user}}
+<div>Games you made:
+	<pre spacing="default">{{user.createdGames | json}}</pre>
+</div>
+<div>New Game:
+	<form name="newGameForm" ng-submit="postGame()">
+		<input ng-model="newGame.title" placeholder="title"></input></br>
+		<input ng-model="newGame.description" placeholder="description"></input></br>
+		<input ng-model="newGame.genre" placeholder="genre"></input></br>
+		<input ng-model="newGame.screenshots" placeholder="screenshot (url)"></input></br>
+		<input ng-model="newGame.minPrice" placeholder="minPrice (int)" type="number"></input></br>
+		<input ng-model="newGame.downloadLink" placeholder="downloadLink (url)"></input></br>
+
+		<input type="submit"></input>
+	</form>
+	{{newGame}}</br>
+	{{newGameForm}}
+</div>
+</div>

@@ -30,20 +30,22 @@
   }
 
   .lilcontainer{
-    width: 30vw;
-    height: 50px;
+    max-width: 70px;
     margin: 0 auto;
+    margin-top: 10px;
     
     .lilbutton {
-      padding: 20%
+      text-align: center;
+      border-radius: 3px;
       width: 100%;
-      height: 100%;
-      display: inline;
-      background-color: red;
+      padding: 10%;
+      background-color: #600;
       color: white;
       
       &:hover{
         cursor: pointer;
+        background-color: gainsboro;
+        color: black;
       }
 
     }
