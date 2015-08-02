@@ -23,3 +23,9 @@ heroku congif:set NODE_ENV=production
 heroku config:set SESSION_SECRETE=lobsterthoughts
 heroku addons: add mongolab
 web: node server/start.js
+
+game of life:
+set up a directive/controller
+directive will be injected into background image
+
+controller handles state variables, functions for drawing and animating the board
