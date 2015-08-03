@@ -28,8 +28,55 @@ font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
   display: inline;
 }
 
+.oauth {
+  width: 100%;
+  margin: 0 auto;
+
+  a {
+    width: 33%;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}
+
+.btn {
+  border-radius: 0px;
+}
+
+.background {
+  background-attachment: fixed;
+  position: absolute;
+  margin-top: -60px;
+  height: 100%;
+  width: 100%;
+  background-image: url("http://www.roadtovr.com/wp-content/uploads/2014/11/newriftarcade-oculus-rift-arcande-4.jpg");
+}
+
+.navbar {
+  color: white;
+  .btn {
+    border-color: white;
+    &:hover {
+      background-color: gainsboro;
+    }
+  }
+}
+
+hr{
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
 @import 'tutorial/main';
 @import 'login/main';
+@import 'sign-up/main';
+@import 'gamepage/main';
+@import 'profile/main';
+@import 'devdash/main';

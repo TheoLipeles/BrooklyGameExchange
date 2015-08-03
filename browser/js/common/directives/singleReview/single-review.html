@@ -1,0 +1,10 @@
+<hr class="style-eight">
+{{review.game.title}}</br>
+</img><h4>{{review.title}}</h4><img src='{{review.author.photo}}' id="avatar"></br>
+
+<div class="rating">
+	<span ng-repeat="rating in _.range(1, review.rating+1)">★</span><span ng-repeat="rating in _.range(1,5-review.rating+1)">☆</span>
+<div>
+	{{review.text}}
+{{review.author.email}}
+

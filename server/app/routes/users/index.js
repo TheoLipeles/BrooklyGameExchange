@@ -5,6 +5,8 @@ var User = require('../../../db/models/user');
 var Game = require('../../../db/models/game');
 var Review = require('../../../db/models/review');
 
+
+
 var ensureAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) {
         next();
@@ -19,9 +21,8 @@ router.get('/', function (req, res, next) {
     .then(function(users){
         res.json(users);   
     })
-    .then(null, function(){
-        var err = new Error('There was an error getting users');
-        err.status = 500;
+    .then(null, function(err){
+        console.log(err);
         next(err);
     });
 });
@@ -32,23 +33,21 @@ router.get('/developers', function(req, res, next) {
     .then(function(developers) {
         res.json(developers);
     })
-    .then(null, function(e) {
-        var err = new Error('There was an error getting developers', e);
-        err.status = 500;
+    .then(null, function(err) {
+        console.log(err);
         next(err);
     });
 });
 
 //GET single user
 router.get('/:id', function (req, res, next) {
-    User.findById(req.params.id).populate("createdGames").exec()
-    .then(function(user){
+    User.findById(req.params.id).deepPopulate("createdGames reviews.game cart.game.developer").exec()
+    .then(function(user) {
         console.log(user);
-        res.json(user);   
+        res.json(user);
     })
-    .then(null, function(){
-        var err = new Error('User Not Found');
-        err.status = 404;
+    .then(null, function(err){
+        console.log(err);
         next(err);
     });
 });
@@ -59,9 +58,8 @@ router.get('/:id/games', function (req, res, next) {
     .then(function(games){
         res.json(games);   
     })
-    .then(null, function(){
-        var err = new Error('User Not Found');
-        err.status = 404;
+    .then(null, function(err){
+        console.log(err);
         next(err);
     });
 });
@@ -72,13 +70,24 @@ router.get('/:id/reviews', function (req, res, next) {
     .then(function(user){
         res.json(user.reviews);   
     })
-    .then(null, function(){
-        var err = new Error('User Not Found');
-        err.status = 404;
+    .then(null, function(err){
+        console.log(err);
         next(err);
     });
 });
 
+//POST new user
+router.post('/', function(req, res, next){
+    User.create(req.body)
+    .then(function(newUser){
+        console.log('new user created!');
+        res.json(newUser);
+    })
+    .then(null, function(err){
+        console.log(err);
+        next(err);
+    });
+});
 
 //POST game created by developer
 router.post('/:id/games', 
@@ -87,18 +96,15 @@ router.post('/:id/games',
         req.body.developer = req.params.id;
         Game.create(req.body)
         .then(function(game){
-            game.save()
-            .then(function(){
-                console.log("new game created");
-                res.json(201, game);   
-            });
+            console.log("new game created");
+            res.json(201, game);   
         })
-        .then(null, function(){
-            var err = new Error('Error: Game Not Created');
-            err.status = 500;
+        .then(null, function(err){
+            console.log(err);
             next(err);
         });
-    });
+    }
+    );
 
 //POST review created by user
 router.post('/:id/reviews',
@@ -112,11 +118,28 @@ router.post('/:id/reviews',
                 res.json(201,review);   
             });
         })
-        .then(null, function(){
-            var err = new Error('Error: Review Not Created');
-            err.status = 500;
+        .then(null, function(err){
+            console.log(err);
+            next(err);
+        });
+    }
+    );
+
+//post game to cart
+router.post('/:id/cart/',
+    function (req, res, next) {
+        User.findByIdAndUpdate(req.params.id, {$addToSet: {cart: {game: req.body.id, price: parseInt(req.body.price)} } })
+        .then(function() {
+            res.sendStatus(201);
+        })
+        .then(null, function(err){
             next(err);
         });
     });
+
+
+
+
+
 
 module.exports = router;

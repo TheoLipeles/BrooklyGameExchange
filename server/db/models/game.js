@@ -5,10 +5,12 @@ var User = require('./user');
 var schema = new mongoose.Schema({
     title: {
         type: String,
-        default: 'untitled'
+        default: 'untitled',
+        unique: true
     },
     description: {
-        type: String
+        type: String,
+        default: ""
     },
     screenshots: [String],
     minPrice: {

@@ -8,8 +8,6 @@ app.config(function ($stateProvider) {
 
 });
 
-
-
 app.controller('BrowseDevelopersCtrl', function ($scope, $state, User){
 
 	User.getAllDevelopers()
@@ -17,7 +15,7 @@ app.controller('BrowseDevelopersCtrl', function ($scope, $state, User){
 		$scope.Developers = developers;
 	})
 	.catch(function(err){
-		console.log('error', err)
+		console.log('error', err);
 	});
 
-})
+});

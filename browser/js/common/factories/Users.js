@@ -30,23 +30,29 @@ app.factory('User', function ($http) {
 			});
 		},
 
-		newUser: function(form) {
-			return $http.post('/api/users', form)
-			.then(function(user){
-				return user.data;
+		newUser: function(user) {
+			return $http.post('/api/users/', user)
+			.then(function(newUser){
+				return newUser.data;
 			})
+			.then(null, function(err){
+				console.log("There was an error", err);
+			});
 		},
 
 		postGame: function(id, game) {
 			return $http.post('/api/users/'+ id + '/games', game)
 			.then(function(savedGame){
+				console.log(savedGame)
 				return savedGame.data;
 			});
 		},
 
 		postReview: function(id, review) {
+			console.log("posting from",id,"with",review)
 			return $http.post('/api/users/'+ id + '/reviews', review)
 			.then(function(savedReview){
+				console.log("review saved:",savedReview)
 				return savedReview.data;
 			});
 		},
