@@ -1,9 +1,12 @@
 <div class="centeredWithMaxWidth thinner">
 <h1>{{user.name}}</h1>
 <div>
+	<h3>Total Downloads: </h3>
+		{{totalDownloads()}}
+<div>
 	<h3>Games you made:</h3>
 	<hr>
-	<single-game-thumb ng-repeat="game in user.gamesCreated"></single-game-thumb>
+	<single-game-thumb ng-repeat="game in user.createdGames"></single-game-thumb>
 </div>
 <div class="newGame">
 	<h3>Add a New Game!</h3>
@@ -14,7 +17,6 @@
 		<input ng-model="newGame.screenshots" placeholder="screenshot (url)"></input></br>
 		<input ng-model="newGame.minPrice" placeholder="minPrice (int)" type="number"></input></br>
 		<input ng-model="newGame.downloadLink" placeholder="downloadLink (url)" required></input></br>
-
 		<input class="btn btn-success" type="submit"></input>
 	</form>
 </div>
