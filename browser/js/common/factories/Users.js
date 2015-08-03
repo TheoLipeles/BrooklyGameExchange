@@ -64,6 +64,18 @@ app.factory('User', function ($http) {
 			});
 		},
 
+		buyGames: function(id, games) {
+			// console.log(games)
+			var justGame = games.map(function(elem){
+				return elem.game._id}
+				)
+			// console.log(gameIds)
+			return $http.post('/api/users/'+id+'/checkout', justGame)
+			.then(function(games){
+				return games.data;
+			});
+		}
+
 
 	};
 

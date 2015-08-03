@@ -1,0 +1,40 @@
+.profile {
+	margin-left: 10%;
+	margin-right: 10%;
+	
+	*{
+		border: 1px solid black;
+	}
+	.pic-name {
+
+		h2{
+			display: inline;
+		}
+
+		#profile-pic {
+			width: 10%;
+			border: 1px solid black;
+		}
+
+	}
+	
+	.stats {
+		display: inline;
+	}
+
+	single-game-thumb {
+		.individualcontainer {
+			width: 150px;
+			height: 150px;
+		}
+	}
+
+	// .rating{
+	// 	border: 1px solid black;
+	// 	display: inline-block;
+	// 	background: blue;
+	// 	border-radius: 10px;
+	// 	padding: 3px;
+	// 	color: yellow;
+	// }
+}
