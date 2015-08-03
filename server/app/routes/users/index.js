@@ -41,7 +41,7 @@ router.get('/developers', function(req, res, next) {
 
 //GET single user
 router.get('/:id', function (req, res, next) {
-    User.findById(req.params.id).deepPopulate("createdGames reviews cart.game.developer").exec()
+    User.findById(req.params.id).deepPopulate("createdGames reviews.game cart.game.developer").exec()
     .then(function(user) {
         console.log(user);
         res.json(user);
@@ -128,7 +128,8 @@ router.post('/:id/reviews',
 //post game to cart
 router.post('/:id/cart/',
     function (req, res, next) {
-        User.findByIdAndUpdate(req.params.id, {$addToSet: {cart: {game: req.body.id, price: parseInt(req.body.price)} } })
+        User.findByIdAndUpdate(req.params.id, {$addToSet: {cart: {game: req.body.id, price: parseInt(req.body.price)} } 
+    })
         .then(function() {
             res.sendStatus(201);
         })
@@ -138,6 +139,17 @@ router.post('/:id/cart/',
     });
 
 
+router.delete('/:id/cart/:itemId',
+    function(req,res,next) {
+        return User.findByIdAndUpdate(req.params.id, {$pull: {cart: {_id: req.params.itemId}}
+    })
+        .then(function(){
+            res.sendStatus(204);
+        })
+        .then(null, function(err){
+            next(err);
+        });
+    });
 
 
 

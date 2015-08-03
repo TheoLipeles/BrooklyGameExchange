@@ -1,20 +1,21 @@
-<div class="centeredWithMaxWidth">
-{{user}}
-<div>Games you made:
-	<pre spacing="default">{{user.createdGames | json}}</pre>
-</div>
-<div>New Game:
-	<form name="newGameForm" ng-submit="postGame()">
-		<input ng-model="newGame.title" placeholder="title"></input></br>
-		<input ng-model="newGame.description" placeholder="description"></input></br>
-		<input ng-model="newGame.genre" placeholder="genre"></input></br>
-		<input ng-model="newGame.screenshots" placeholder="screenshot (url)"></input></br>
-		<input ng-model="newGame.minPrice" placeholder="minPrice (int)" type="number"></input></br>
-		<input ng-model="newGame.downloadLink" placeholder="downloadLink (url)"></input></br>
+<div class="centeredWithMaxWidth thinner">
+	<h1>{{user.name}}</h1>
+	<div>
+		<h3>Games you made:</h3>
+		<hr>
+		<single-game-thumb ng-repeat="game in user.createdGames"></single-game-thumb>
+	</div>
+	<div class="newGame">
+		<h3>Add a New Game!</h3>
+		<form name="newGameForm" ng-submit="postGame()">
+			<input ng-model="newGame.title" placeholder="title" required></input></br>
+			<textarea id="description" ng-model="newGame.description" placeholder="description" required></textarea></br>
+			<input ng-model="newGame.genre" placeholder="genre" required></input></br>
+			<input ng-model="newGame.screenshots" placeholder="screenshot (url)"></input></br>
+			<input ng-model="newGame.minPrice" placeholder="minPrice (int)" type="number"></input></br>
+			<input ng-model="newGame.downloadLink" placeholder="downloadLink (url)" required></input></br>
 
-		<input type="submit"></input>
-	</form>
-	{{newGame}}</br>
-	{{newGameForm}}
-</div>
+			<input class="btn btn-success" type="submit"></input>
+		</form>
+	</div>
 </div>

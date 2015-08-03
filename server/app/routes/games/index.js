@@ -6,7 +6,7 @@ var Game = require('../../../db/models/game.js');
 var Review = require('../../../db/models/review.js');
 
 router.get('/', function (req,res){
-	Game.find({})
+	Game.find({}).populate("developer")
 	.then(function(games){
 		res.json(games);
 	},function(){
@@ -24,7 +24,7 @@ router.get('/:id', function (req,res){
 });
 
 router.get('/:id/reviews', function(req,res){
-	Review.find({game: req.params.id}).populate("author").exec()
+	Review.find({game: req.params.id}).populate("author game").exec()
 	.then(function(reviews){
 		res.json(reviews);
 	},function(err){

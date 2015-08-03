@@ -28,7 +28,7 @@ app.controller("UserCtrl", function($scope, User){
     });
 });
 
-app.controller("UserProfileCtrl", function($scope, $stateParams, User){
+app.controller("UserProfileCtrl", function($scope, $stateParams, User, AuthService){
     User.getOne($stateParams.id)
     .then(function(user){
         $scope.user = user;
@@ -45,4 +45,9 @@ app.controller("UserProfileCtrl", function($scope, $stateParams, User){
     .then(null, function(err){
         console.log(err);
     });
+
+    AuthService.getLoggedInUser()
+    .then(function(loggedInUser){
+        $scope.isAdmin = loggedInUser.isAdmin;
+    })
 });

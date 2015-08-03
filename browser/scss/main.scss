@@ -63,6 +63,14 @@ font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
   }
 }
 
+hr{
+    border: 0;
+    height: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
@@ -70,3 +78,5 @@ font-family: Futura, 'Trebuchet MS', Arial, sans-serif;
 @import 'login/main';
 @import 'sign-up/main';
 @import 'gamepage/main';
+@import 'profile/main';
+@import 'devdash/main';
