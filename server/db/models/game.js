@@ -9,7 +9,8 @@ var schema = new mongoose.Schema({
         unique: true
     },
     description: {
-        type: String
+        type: String,
+        default: ""
     },
     screenshots: [String],
     minPrice: {

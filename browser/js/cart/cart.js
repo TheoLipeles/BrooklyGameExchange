@@ -8,13 +8,13 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('CartCtrl', function ($scope, $stateParams, User){
+app.controller('CartCtrl', function ($scope, $stateParams, User, Games){
 	
 	User.getOne($stateParams.id)
 	.then(function(user) {
 		$scope.name = user.name;
-		$scope.cart = user.cart;
-	});
+		$scope.cart = user.cart || [];
+	})
 
 	$scope.getTotal = function() {
 		console.log("$scope.cart", $scope.cart);
