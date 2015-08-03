@@ -40,9 +40,7 @@ app.controller('CartCtrl', function ($scope, $stateParams, User, Games,$state){
 		console.log('cart:',$scope.cart)
 		User.buyGames($stateParams.id, $scope.cart)
 		.then(function(games){
-			$state.go('confirm', {cart: "hello"}
-				// {cart: $scope.cart, total: $scope.getTotal}
-				)
+			$state.go('confirm', {cart: $scope.cart, total: $scope.getTotal});
 			Games.removeAllFromCart()
 			console.log("Bought",games)
 		})
