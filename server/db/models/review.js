@@ -1,6 +1,7 @@
 'use strict';
 var mongoose = require('mongoose');
 var User = require('./user');
+var Game = require('./game');
 
 var schema = new mongoose.Schema({
     title: {
@@ -19,11 +20,22 @@ var schema = new mongoose.Schema({
 var Review = mongoose.model('Review', schema);
 
 schema.pre('save',function(next){
-    console.log(this);
     User.findByIdAndUpdate(this.author, {$push: {reviews: this._id}})
     .exec()
     .then(function(user){
         console.log("review added to", user.reviews);
+        next();
+    })
+    .then(null, function(err){
+        console.log(err);
+    });
+});
+
+schema.pre('save', function(next){
+    Game.findByIdAndUpdate(this.game, {$push: {reviews: this._id}})
+    .exec()
+    .then(function(game){
+        console.log("game added to", game.reviews);
         next();
     })
     .then(null, function(err){

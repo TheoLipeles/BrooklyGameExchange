@@ -9,7 +9,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('GameCtrl', function ($scope,$stateParams,Games,AuthService,User){
+app.controller('GameCtrl', function ($scope, $stateParams, Games, AuthService, User){
 
 	$scope.newReview = {};
 
@@ -23,18 +23,30 @@ app.controller('GameCtrl', function ($scope,$stateParams,Games,AuthService,User)
 		console.log('error', err);
 	});
 
-
 	$scope.updateReviews = function(){
-			Games.getReviews($stateParams.id)
+		Games.getReviews($stateParams.id)
 		.then(function(reviews){
-			// console.log(reviews)
 			$scope.reviews = reviews;
+			$scope.avgRatingRev();
 		})
 		.catch(function(err){
 			console.log('error', err);
 		});
 	};
+
+	$scope.avgRatingRev = function() {
+		var revSum = 0;
+		for (var i = 0; i < $scope.reviews.length; i++){
+			revSum += parseInt($scope.reviews[i].rating);
+		}
+		$scope.avgRatingGame = Math.floor(revSum / $scope.reviews.length);
+	};
+
 	$scope.updateReviews();
+
+	$scope.reset = function() {
+		$scope.newReview = {};
+	};
 
 	$scope.postReview = function(){
 		//this should be in the resolve of the state but I couldn't get it to work
@@ -44,11 +56,11 @@ app.controller('GameCtrl', function ($scope,$stateParams,Games,AuthService,User)
 			User.postReview(user._id, $scope.newReview)
 			.then(function(){
 				$scope.updateReviews();
+				$scope.reset();
 			});
 		});
 
 	};
-
 });
 
 app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, Games, $stateParams) {

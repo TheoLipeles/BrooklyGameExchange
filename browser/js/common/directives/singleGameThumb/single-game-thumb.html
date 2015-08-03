@@ -1,5 +1,8 @@
-<div class="individualcontainer">
+<div class="individualcontainer" ui-sref="agame({id: game._id})">
 	<img src="{{ game.screenshots[0] }}"></img>
-	<span class="littlelabel">{{game.title}}</span>
+	<div id="innercontainer">
+		<span class="littlelabel"><i>{{game.title}}</i></span></br>
+		<span class="littlelabel">{{game.developer.name}}</span>
+		<span class="littlelabel">{{game.avgRatingGame}}</span>
+	</div>
 </div>
-
