@@ -4,6 +4,7 @@ var router = require('express').Router();
 var User = require('../../../db/models/user');
 var Game = require('../../../db/models/game');
 var Review = require('../../../db/models/review');
+var 
 
 
 
@@ -63,6 +64,7 @@ router.get('/:id/games', function (req, res, next) {
         next(err);
     });
 });
+
 
 //GET all reviews created by a single user
 router.get('/:id/reviews', function (req, res, next) {
