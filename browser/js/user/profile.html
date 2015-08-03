@@ -5,17 +5,19 @@
 		<h3>Member since: 2014</h3>
 	<div>
 	<div class="stats col-lg-8">
-		<h3>My Games:<single-game-thumb ui-sref='agame({id: game._id})' ng-repeat="game in user.createdGames"></single-game-thumb></h3>
-		<h3>My Reviews:</h3>
+		<h3>My Games:</h3><br>
+			<single-game-thumb ui-sref='agame({id: game._id})' ng-repeat="game in user.createdGames"></single-game-thumb>
+		<h3>My Reviews:</h3><br>
+			<single-review ng-repeat="review in user.reviews"></single-review>
+<!-- 		<div ng-show="true" class="dev-panel">
+			<h2>Upload New Game</h2><button>PLUS</button>
+		</div> -->
 	</div>
 	<div class="recommendations col-lg-4">	
 		<h3>My Recommendations:</h3>
 	</div>
-	<div ng-show="isDev" class="dev-panel">
-		<h2>Upload New Game</h2><button>PLUS</button>
-	</div>
-	<div ng-show='isAdmin' class="admin-panel">
+<!-- 	<div ng-show='isAdmin' class="admin-panel">
 		<h2><single-user ng-repeat="user in users" ui-sref="profile({id: user._id})"></single-user></h2>
-	</div>
+	</div> -->
 <div>
 <pre spacing="default">{{user | json}}</pre>

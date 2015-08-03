@@ -24,7 +24,7 @@ router.get('/:id', function (req,res){
 });
 
 router.get('/:id/reviews', function(req,res){
-	Review.find({game: req.params.id}).populate("author").exec()
+	Review.find({game: req.params.id}).populate("author game").exec()
 	.then(function(reviews){
 		res.json(reviews);
 	},function(err){
