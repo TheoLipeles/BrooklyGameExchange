@@ -10,11 +10,15 @@ app.config(function ($stateProvider) {
 
 app.controller('CartCtrl', function ($scope, $stateParams, User, Games){
 	
-	User.getOne($stateParams.id)
-	.then(function(user) {
-		$scope.name = user.name;
-		$scope.cart = user.cart || [];
-	})
+	var getCart = function(){ 
+		return User.getOne($stateParams.id)
+		.then(function(user) {
+			$scope.name = user.name;
+			$scope.cart = user.cart || [];
+		})
+	};
+
+	getCart();
 
 	$scope.getTotal = function() {
 		console.log("$scope.cart", $scope.cart);
@@ -25,6 +29,12 @@ app.controller('CartCtrl', function ($scope, $stateParams, User, Games){
 		return total;
 	};
 
+	$scope.deleteItem = function(itemId){ 
+		Games.removeFromCart(itemId)
+		.then(function(){
+			getCart();	
+		});
+	};
 
 
 });

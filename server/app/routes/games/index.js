@@ -6,7 +6,7 @@ var Game = require('../../../db/models/game.js');
 var Review = require('../../../db/models/review.js');
 
 router.get('/', function (req,res){
-	Game.find({})
+	Game.find({}).populate("developer")
 	.then(function(games){
 		res.json(games);
 	},function(){

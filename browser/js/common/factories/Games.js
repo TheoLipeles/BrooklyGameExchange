@@ -28,6 +28,13 @@ app.factory('Games', function ($http, AuthService) {
 			.then(function(user) {
 				return $http.post('/api/users/' + user._id + '/cart/' , {id: id, price: price})
 			});
+		},
+
+		removeFromCart: function(itemId){
+			return AuthService.getLoggedInUser(false)
+			.then(function(user) {
+				return $http.delete('/api/users/' + user._id + '/cart/' + itemId)
+			});
 		}
 
 	}
