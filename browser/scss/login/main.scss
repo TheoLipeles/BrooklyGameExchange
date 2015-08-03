@@ -1,4 +1,43 @@
-#login-form {
-  width: 60%;
+.container-login {
+  width: 40%;
   margin: 0 auto;
+  margin-top: 5%;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: #ddd;
+
+	form {
+	  margin-left: 10%;
+	  margin-right: 10%;  
+	  width: 80%;
+	  padding-top: 5%;
+	  padding-bottom: 5%;
+	  
+	  h1 {
+	    display: inline;
+	  }
+
+	  hr{
+	    border: 1px solid black;
+	  }
+
+	  input {
+	    margin: 5px;
+	    margin-bottom:2%;
+	    border-radius: 5px;
+	  }
+
+	  .btn{
+	    margin-bottom: 1%;
+	    padding: 0.5%;
+	  }
+
+	  #infoBad {
+	    color: red;
+	  }
+
+	  #infoGood {
+	    color: green;
+	  }
+	}
 }
