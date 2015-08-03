@@ -27,9 +27,12 @@
     width: 400px;
     padding-top: 120px;
     margin: 0 auto;
+    z-index: 2;
   }
 
   .lilcontainer{
+    position: relative;
+    z-index: 3;
     max-width: 70px;
     margin: 0 auto;
     margin-top: 10px;
@@ -51,7 +54,6 @@
     }
 
   }
-
 }
 
 .centeredWithMaxWidth {
