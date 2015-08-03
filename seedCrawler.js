@@ -19,7 +19,7 @@ Review.remove({}, function(err) {
 
 User.remove({}, function(err) {
 	console.log("collection cleared");
-	User.create({name: "Admin", email: "admin", password: "password", isDev: true}).then(function(admin) {
+	User.create({name: "Admin", email: "admin", password: "password", isDev: true, isAdmin: true}).then(function(admin) {
 		admin.save().then(function() {
 			console.log("Admin account saved");
 		});
