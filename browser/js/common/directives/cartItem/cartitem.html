@@ -1,12 +1,17 @@
 <hr class="style-eight">
 <div class="container-fluid">
 	<div class="col-xs-6 col-sm-3">
-		<img src="{{item.screenshots[0]}}"></img>{{item.game}}
+		<img src="{{item.game.screenshots[0]}}" class="img-thumbnail" width="150px"></img>
 	</div>
-	<div class="col-xs-6 col-sm-6">
-		B
+	<div class="col-xs-6 col-sm-6 cartItem">
+		<h4>{{item.game.title}}</h4>
+		<h6>{{item.game.developer.name}}</h6>
+		<h6 ng-bind-html="item.game.description.match('Description.*')[0]"></h6>
 	</div>
 	<div class="col-xs-6 col-sm-3">
-		C
+		${{item.price}}
+		<button type="button" class="btn btn-danger pull-right" aria-label="Right Align">
+			<span class="glyphicon glyphicon-remove"></span>
+		</button>
 	</div>
 </div>

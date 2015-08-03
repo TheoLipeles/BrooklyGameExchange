@@ -5,6 +5,8 @@ var User = require('../../../db/models/user');
 var Game = require('../../../db/models/game');
 var Review = require('../../../db/models/review');
 
+
+
 var ensureAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) {
         next();
@@ -39,10 +41,10 @@ router.get('/developers', function(req, res, next) {
 
 //GET single user
 router.get('/:id', function (req, res, next) {
-    User.findById(req.params.id).populate("createdGames", "reviews", "Game").exec()
-    .then(function(user){
+    User.findById(req.params.id).deepPopulate("createdGames reviews cart.game.developer").exec()
+    .then(function(user) {
         console.log(user);
-        res.json(user);   
+        res.json(user);
     })
     .then(null, function(err){
         console.log(err);
@@ -102,7 +104,7 @@ router.post('/:id/games',
             next(err);
         });
     }
-);
+    );
 
 //POST review created by user
 router.post('/:id/reviews',
@@ -121,7 +123,7 @@ router.post('/:id/reviews',
             next(err);
         });
     }
-);
+    );
 
 //post game to cart
 router.post('/:id/cart/',
