@@ -1,6 +1,8 @@
 'use strict';
 var crypto = require('crypto');
 var mongoose = require('mongoose');
+var deepPopulate = require('mongoose-deep-populate');
+
 
 var schema = new mongoose.Schema({
     name: {
@@ -32,31 +34,33 @@ var schema = new mongoose.Schema({
     cart: {
         type: [{
             game: {type: mongoose.Schema.ObjectId, ref:"Game"}, price: {type: Number}}]
-    },
-    isDev: {
-        type: Boolean,
-        default: false
-    },
-    isAdmin: {
-        type: Boolean,
-        default: false
-    },
-    createdGames: {
-        type: [{type: mongoose.Schema.ObjectId, ref:"Game"}]
-    },
-    twitter: {
-        id: String,
-        username: String,
-        token: String,
-        tokenSecret: String
-    },
-    facebook: {
-        id: String
-    },
-    google: {
-        id: String
-    }
-});
+        },
+        isDev: {
+            type: Boolean,
+            default: false
+        },
+        isAdmin: {
+            type: Boolean,
+            default: false
+        },
+        createdGames: {
+            type: [{type: mongoose.Schema.ObjectId, ref:"Game"}]
+        },
+        twitter: {
+            id: String,
+            username: String,
+            token: String,
+            tokenSecret: String
+        },
+        facebook: {
+            id: String
+        },
+        google: {
+            id: String
+        }
+    });
+
+schema.plugin(deepPopulate)
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
 // are all used for local authentication security.
