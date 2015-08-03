@@ -9,7 +9,7 @@ var schema = new mongoose.Schema({
     },
     photo: {
         type: String,
-        default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Video_game_controller_icon_designed_by_Maico_Amorim.svg/1249px-Video_game_controller_icon_designed_by_Maico_Amorim.svg.png'
+        default: 'http://i.imgur.com/EUWn9y7.png'
     },
     email: {
         type: String,

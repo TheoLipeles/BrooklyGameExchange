@@ -1,7 +1,21 @@
-<h1>{{user.email}}</h1>
-<img src="{{user.photo}}" width='60px'></img>
-Games:
-<single-game-thumb ui-sref='agame({id: game._id})' ng-repeat="game in user.createdGames"></single-game-thumb>
-Frends: ????
-Recommendations ????
+<div class="profile">
+	<div class="pic-name">
+		<img id="profile-pic" src="{{user.photo}}" width='60px'></img>
+		<h2>{{user.name}}</h2>
+		<h3>Member since: 2014</h3>
+	<div>
+	<div class="stats col-lg-8">
+		<h3>My Games:<single-game-thumb ui-sref='agame({id: game._id})' ng-repeat="game in user.createdGames"></single-game-thumb></h3>
+		<h3>My Reviews:</h3>
+	</div>
+	<div class="recommendations col-lg-4">	
+		<h3>My Recommendations:</h3>
+	</div>
+	<div ng-show="isDev" class="dev-panel">
+		<h2>Upload New Game</h2><button>PLUS</button>
+	</div>
+	<div ng-show='isAdmin' class="admin-panel">
+		<h2><single-user ng-repeat="user in users" ui-sref="profile({id: user._id})"></single-user></h2>
+	</div>
+<div>
 <pre spacing="default">{{user | json}}</pre>

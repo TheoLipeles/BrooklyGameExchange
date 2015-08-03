@@ -1,0 +1,25 @@
+.profile {
+	margin-left: 10%;
+	margin-right: 10%;
+
+	*{
+		border: 1px solid black;
+	}
+	
+	.pic-name {
+
+		h2{
+			display: inline;
+		}
+
+		#profile-pic {
+			width: 10%;
+			border: 1px solid black;
+		}
+
+	}
+	
+	.stats {
+		display: inline;
+	}
+}
