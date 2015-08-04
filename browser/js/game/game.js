@@ -102,23 +102,21 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, Games, $st
 
 app.controller('ModalCtrl', function ($scope, $modal, $log) {
 
-	$scope.animationsEnabled = true;
+	//$scope.animationsEnabled = true;
 
 	$scope.open = function (size) {
 
 		var modalInstance = $modal.open({
 			animation: $scope.animationsEnabled,
-			templateUrl: 'myModalContent.html',
+			templateUrl: 'js/game/myModalContent.html',
 			controller: 'ModalInstanceCtrl',
 			size: size
+			//^^mean class="modal-sm"
 		});
 
 		modalInstance.result.then(function (selectedItem) {
 			$log.info('Modal dismissed at: ' + new Date());
 		});
-
-
-
 	};  
 
 
