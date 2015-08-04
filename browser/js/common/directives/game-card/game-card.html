@@ -1,5 +1,5 @@
 <div class='card col-lg-3'>
-	<img src="{{game.screenshots[0]}}" width="50"><img>
+	<img ng-src="{{game.screenshots[0]}}" width="50"><img>
 	<p>{{game.name}}</p> 
-		<a ui-sref="agame({id: user._id})">{{game.title}}</a><span ng-click="games.deleteGame(game._id)" class="glyphicon glyphicon-remove-sign"</span>
+	<a ui-sref="agame({id: user._id})">{{game.title}}</a><span ng-click="games.deleteGame(game._id)" class="glyphicon glyphicon-remove-sign"</span>
 </div>
