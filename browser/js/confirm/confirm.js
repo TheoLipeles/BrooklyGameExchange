@@ -13,7 +13,8 @@ app.config(function ($stateProvider) {
 });
 
 
-app.controller('ConfirmCtrl', function($scope, $stateParams,$state){
+app.controller('ConfirmCtrl', function($scope, $stateParams,$state,Games,user){
+	$scope.user = user;
 
 	console.log("params",$stateParams)
 
@@ -27,5 +28,11 @@ app.controller('ConfirmCtrl', function($scope, $stateParams,$state){
 		if ($scope.cart.length > 1) return "s";
 		else return;
 	}
-	
+
+	$scope.okay = function(){
+		console.log("hey")
+		Games.removeAllFromCart()
+		$state.go('home');
+	}
+
 })
