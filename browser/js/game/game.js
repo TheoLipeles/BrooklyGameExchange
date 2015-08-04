@@ -72,8 +72,9 @@ app.controller('GameCtrl', function ($scope, $stateParams, Games, AuthService, U
 
 });
 
-app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, Games, $stateParams) {
+app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, Games, $stateParams, $cookies, AuthService) {
 	$scope.game = {};
+	$scope.loggedIn = AuthService.isAuthenticated();
 
 	Games.getOne($stateParams.id)
 	.then(function(game){
@@ -85,10 +86,23 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, Games, $st
 	});
 
 	$scope.ok = function(){
-		Games.addToCart($stateParams.id, $scope.game.price)
-		.then(function() {
+		if ($scope.loggedIn) {
+			Games.addToCart($stateParams.id, $scope.game.price)
+			.then(function() {
+				$modalInstance.dismiss();
+			});
+		} else {
+			var cart = $cookies.get('cart');
+			if (!cart) {
+				cart = [{game: $stateParams.id, price: $scope.game.price}];
+			} else {
+				cart = JSON.parse(cart);
+				cart.push({game: $stateParams.id, price: $scope.game.price});
+				console.log(cart);
+			}
+			$cookies.put('cart', JSON.stringify(cart));
 			$modalInstance.dismiss();
-		});
+		}
 	};
 
 
@@ -107,7 +121,7 @@ app.controller('ModalCtrl', function ($scope, $modal, $log) {
 	$scope.open = function (size) {
 
 		var modalInstance = $modal.open({
-			animation: $scope.animationsEnabled,
+			animation: true,
 			templateUrl: 'js/game/myModalContent.html',
 			controller: 'ModalInstanceCtrl',
 			size: size
@@ -120,11 +134,6 @@ app.controller('ModalCtrl', function ($scope, $modal, $log) {
 	};  
 
 
-
-
-	$scope.toggleAnimation = function () {
-		$scope.animationsEnabled = !$scope.animationsEnabled;
-	};
 
 });
 
