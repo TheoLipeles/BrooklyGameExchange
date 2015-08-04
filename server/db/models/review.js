@@ -19,7 +19,7 @@ var schema = new mongoose.Schema({
 
 var Review = mongoose.model('Review', schema);
 
-schema.pre('save',function(next){
+schema.post('save',function(next){
     User.findByIdAndUpdate(this.author, {$push: {reviews: this._id}})
     .exec()
     .then(function(user){
@@ -31,7 +31,7 @@ schema.pre('save',function(next){
     });
 });
 
-schema.pre('save', function(next){
+schema.post('save', function(next){
     Game.findByIdAndUpdate(this.game, {$push: {reviews: this._id}})
     .exec()
     .then(function(game){

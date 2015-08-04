@@ -1,6 +1,6 @@
 <div class="centeredWithMaxWidth thinner">
 	<h1>{{name}}'s Cart</h1>
-	<div ng-show="cart.length">
+	<div ng-show="cart.length" class="panel panel-default addPadding">
 		<div class="container-fluid">
 			<div class="col-xs-6 col-sm-3">
 				Screenshot
@@ -16,6 +16,7 @@
 
 		<cartitem ng-repeat="item in cart"></cartitem>
 
+			<hr>
 		<div class="container-fluid">
 			<div class="col-xs-6 col-sm-3">
 				
@@ -33,4 +34,4 @@
 	<div ng-show="!!!cart.length"><h3>Your cart is empty! Go <span ui-sref="browse">buy some games!</span></h3></div>
 </br>
 <!-- <pre>Your Cart Total is {{getTotal()}}</pre> -->
-<pre spacing="default">{{cart | json}}</pre>
+

@@ -20,6 +20,9 @@ app.controller('ConfirmCtrl', function($scope, $stateParams,$state,Games,user){
 
 	$scope.cart = $stateParams.cart;
 
+	var justGameIds = $scope.cart.map(function(elem){return elem.game._id})
+
+
 	$scope.total = function(){
 		return $stateParams.total();
 	}
@@ -31,8 +34,13 @@ app.controller('ConfirmCtrl', function($scope, $stateParams,$state,Games,user){
 
 	$scope.okay = function(){
 		console.log("hey")
+		Games.addDownloads(justGameIds)
+		.then(function(games){
+			console.log('recieved',games)
+			$scope.games = games;
+		});
 		Games.removeAllFromCart()
-		$state.go('browse');
+		// $state.go('browse');
 	}
 
 })

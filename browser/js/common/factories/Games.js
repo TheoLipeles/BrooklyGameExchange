@@ -50,9 +50,21 @@ app.factory('Games', function ($http, AuthService) {
 			.then(function(user) {
 				return $http.delete('/api/users/' + user._id + '/cart/')
 			});
+		},
+
+		addDownloads: function(ids){
+			return AuthService.getLoggedInUser(false)
+			.then(function(user) {
+				return $http.put('/api/games/'+user._id+'/addDownloads', {ids: ids})
+			})
+			.then(function(game){
+				console.log('middle:', game.data)
+				return game.data
+			});
 		}
-
-
-
 	}
+
+
+
+
 })

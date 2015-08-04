@@ -27,9 +27,10 @@ var schema = new mongoose.Schema({
     reviews: [{type: mongoose.Schema.ObjectId, ref: 'Review'}]
 });
 
-schema.pre('save',function(next){
+schema.post('save',function(next){
     User.findByIdAndUpdate(this.developer, {$push: {createdGames: this._id}})
     .then(function(user){
+        console.log(user);
         console.log("game added to", user.createdGames);
         next();
     })
