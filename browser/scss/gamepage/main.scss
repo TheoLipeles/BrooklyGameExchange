@@ -1,7 +1,3 @@
-#topHalf{
-	display: block;
-}
-
 #reviewsForm{
 	display: block;
 	clear: both;
@@ -19,22 +15,24 @@
 	display: block;
 }
 
-#gameHolder{
-	padding: 10px;
-	display: inline-block;
-	float: left;
-	width: 70%;
-	height: auto;
+.holder{
+	display: inline;
+	background: #f00;
 }
 
-#moreInfo{
-	float: right;
+
+#rightSide{
 	display: inline-block;
-	width: 30%;
-	height: 500px;
-	background: red;
+	border: 1px solid lightgrey;
+	background: white;
+	border-radius: 5px;
+	height: 100%;
+	margin-right: -20px;
+	padding: 10px;
 }
+
 
 .thinner{
 	width: 70%;
 }
+
