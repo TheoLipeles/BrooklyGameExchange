@@ -1,29 +1,30 @@
 <div class="centeredWithMaxWidth thinner" controller="GameCtrl">
 	<div class="holder">
 		<div class="col col-md-8">
-			<h1>{{thisGame.title}}</h1>
-			<h3>A game by {{thisGame.developer.name}}</h3>
-			<h3>Average rating: {{avgRatingGame}}</h3>
-			<img ng-repeat="screenshot in thisGame.screenshots" src="{{screenshot}}"></img></br>
+			<img class ="smallImg thumbnail" ng-repeat="screenshot in thisGame.screenshots" src="{{screenshot}}"></img></br>
+			<div id="titleAndStuff">
+				<h1>{{thisGame.title}}</h1>			
+
+				<div ng-controller="ModalCtrl" class="modalButton">
+					<script type="text/ng-template" id="myModalContent.html">
+					</script>
+					<button class="btn btn-success" ng-click="open('sm')">Purchase Game</button>    
+				</div>   
+			</div>
+
+			<!-- 			<h3>Average rating: {{avgRatingGame}}</h3> -->
 			<span ng-bind-html="thisGame.description.match('Description.*')[0]"{{thisGame.description}}> </span>
+			<hr>
 		</div>
 		<div class="col col-md-4" id="rightSide">
-			<div ng-controller="ModalCtrl">
-				<script type="text/ng-template" id="myModalContent.html">
-				<div class="modal-header">
-				<input type="number" id="game" ng-model="game.price"></input>
-				</div>
-				<div class="modal-body">
-				</div>
-				<div class="modal-footer">
-				<button class="btn btn-primary" ng-click="ok()">Add To Cart</button>
-				<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-				</div>
-				</script>
-				<button class="btn btn-success" ng-click="open()">Purchase Game</button>
-			</div>    
+			<h5>Genre: {{thisGame.genre}}</h5><h5>Developer: {{thisGame.developer.name}}</h5>
+
+			<h5>Average rating: {{avgRatingGame}}</h5>
+
+
 			MORE LIKE THIS:
 		</div>
+
 
 
 

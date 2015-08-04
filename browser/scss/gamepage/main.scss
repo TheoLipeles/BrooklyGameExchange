@@ -20,6 +20,14 @@
 	background: #f00;
 }
 
+h1{
+	display: inline;
+}
+
+
+input {
+	margin: 5px 0px;
+}
 
 #rightSide{
 	display: inline-block;
@@ -32,7 +40,21 @@
 }
 
 
+#titleAndStuff{
+	padding: 10px 0px;
+}
+
 .thinner{
 	width: 70%;
+}
+
+.modalButton{
+	display: inline;
+	float: right;
+
+}
+.smallImg{
+	width: 100%;
+	margin-bottom: -20px;
 }
 
