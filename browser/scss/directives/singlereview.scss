@@ -1,18 +1,20 @@
 single-review {
 
 	#avatar {
-		display: inline-block;
+		display: inline;
 		width: 60px;
 	}
 	h4{
+		line-height: 0px;
 		display: inline;
 	}
 
 	hr{
-      border: 0;
-  	  height: 0;
-   	  border-top: 1px solid rgba(0, 0, 0, 0.4);
-   	  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+		border: 0;
+		height: 0;
+		border-top: 1px solid rgba(0, 0, 0, 0.4);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 
 	}
+
 }

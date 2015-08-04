@@ -32,7 +32,7 @@ app.controller('ConfirmCtrl', function($scope, $stateParams,$state,Games,user){
 	$scope.okay = function(){
 		console.log("hey")
 		Games.removeAllFromCart()
-		$state.go('home');
+		$state.go('browse');
 	}
 
 })
