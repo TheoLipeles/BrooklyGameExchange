@@ -12,7 +12,7 @@ app.controller('BrowseDevelopersCtrl', function ($scope, $state, User){
 
 	User.getAllDevelopers()
 	.then(function(developers){
-		$scope.Developers = developers;
+		$scope.developers = developers;
 	})
 	.catch(function(err){
 		console.log('error', err);
