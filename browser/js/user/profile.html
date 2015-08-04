@@ -1,24 +1,24 @@
-<div class="profile">
-	<div class="pic-name">
+<div class="centeredWithMaxWidth thinner">
+	
+	<div class="stats col-lg-8">
 		<img id="profile-pic" ng-src="{{user.photo}}" width='60px'></img>
 		<h2>{{user.name}}</h2>
-		<h3>Member since: 2014</h3>
+		<h4>Member since: 2014</h4>
 		<div>
-			<div class="stats col-lg-8">
-				<h3>My Games:</h3><br>
+				<h3>Games I Bought:</h3><br>
 				<single-game-thumb ui-sref='agame({id: game._id})' ng-repeat="game in user.purchaseHistory"></single-game-thumb>
-				<h3>My Reviews:</h3><br>
+				<h3 ng-show="user.createdGames.length > 0">Games I Created:</h3><br>
+				<single-game-thumb ui-sref='agame({id: game._id})' ng-repeat="game in user.createdGames" ></single-game-thumb>
+				<h3 ng-show="user.reviews.length > 0">My Reviews:</h3><br>
 				<single-review ng-repeat="review in user.reviews"></single-review>
-<!-- 		<div ng-show="true" class="dev-panel">
-			<h2>Upload New Game</h2><button>PLUS</button>
-		</div> -->
+
+		</div>		
 	</div>
+
 	<div class="recommendations col-lg-4">	
 		<h3>My Recommendations:</h3>
+		<span ng-show='user.recommendations.length == 0'>You have no recommendations! Go buy some games so we know what you're into!</span>
 		<single-game-thumb ui-sref='agame({id: game._id})' ng-repeat="game in user.recommendations"></single-game-thumb>
 	</div>
-<!-- 	<div ng-show='isAdmin' class="admin-panel">
-		<h2><single-user ng-repeat="user in users" ui-sref="profile({id: user._id})"></single-user></h2>
-	</div> -->
-	<div>
-		<pre spacing="default">{{user | json}}</pre>
+
+</div>
