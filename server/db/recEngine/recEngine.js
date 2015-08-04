@@ -3,8 +3,9 @@ var Promise = require('bluebird');
 // var Bucket = Promise.promisifyAll(mongoose.model('Bucket'));
 // var Action = Promise.promisifyAll(mongoose.model('Action'));
 var User = Promise.promisifyAll(mongoose.model('User'));
+var Game = Promise.promisifyAll(mongoose.model('Game'));
 
-var getRecommendations = function(id, actions) {
+var getRecommendations = function(id) {
 	var userPurchaseHistory;
 	var allUsers = [];
 	var gamesNotInCommon = [];
@@ -38,7 +39,7 @@ var getRecommendations = function(id, actions) {
 
 
 	var compareGameFunc = function(a, b) {
-		return gameRecommendationValue(a) - gameRecommendationValue(b);
+		return gameRecommendationValue(a._id) - gameRecommendationValue(b._id);
 	};
 
 	return User.findById(id)
@@ -47,14 +48,22 @@ var getRecommendations = function(id, actions) {
 		return User.find({});
 	})
 	.then(function(users) {
+		console.log(users);
 		users.map(function(user) {
+			console.log(typeof(user._id));
 			allUsers.push({id: user._id, purchaseHistory: user.purchaseHistory});
 		});
 	})
 	.then(function() {
+		console.log(typeof(allUsers[0]));
 		allUsers.sort(compareFunc);
 		allUsers = allUsers.slice(0, allUsers.length - 10);
-		gamesNotInCommon.sort(compareGameFunc);
+		console.log(gamesNotInCommon);
+		return Game.find({_id: {$in: gamesNotInCommon}});
+	})
+	.then(function(games) {
+		console.log(games);
+		games.sort(compareGameFunc);
 		return gamesNotInCommon;
 	});
 };
