@@ -52,6 +52,19 @@ router.get('/:id', function (req, res, next) {
     });
 });
 
+//DELETE single user
+router.delete('/:id', function (req, res, next) {
+    User.findOneAndRemove({_id: req.params.id}).exec()
+    .then(function(user) {
+        console.log("Removed user", user);
+        res.json(user);
+    })
+    .then(null, function(err){
+        console.log(err);
+        next(err);
+    });
+});
+
 //GET all games created by a single developer
 router.get('/:id/games', function (req, res, next) {
     Game.find({developer: req.params.id}).populate("reviews").exec()
@@ -103,8 +116,7 @@ router.post('/:id/games',
             console.log(err);
             next(err);
         });
-    }
-    );
+    });
 
 //POST review created by user
 router.post('/:id/reviews',
@@ -177,6 +189,7 @@ router.post('/:id/checkout',
             next(err);
         });
     });
+
 
 
 
