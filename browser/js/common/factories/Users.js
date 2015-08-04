@@ -77,6 +77,13 @@ app.factory('User', function ($http) {
 			.then(function(games){
 				return games.data;
 			});
+		},
+
+		getRecommendations: function(id) {
+			return $http.get('/api/users/' + id + '/recommended')
+			.then(function(games) {
+				return games.data;
+			});
 		}
 
 	};

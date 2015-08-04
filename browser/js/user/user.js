@@ -76,6 +76,12 @@ app.controller("UserProfileCtrl", function($scope, $stateParams, User, AuthServi
         console.log(err);
     });
 
+    User.getRecommendations($stateParams.id)
+    .then(function(games) {
+        $scope.user.recommendations = games;
+    });
+
+
     AuthService.getLoggedInUser()
     .then(function(loggedInUser){
         $scope.isAdmin = loggedInUser.isAdmin;

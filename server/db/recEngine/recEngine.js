@@ -12,10 +12,10 @@ var getRecommendations = function(id) {
 
 	var comparePurchaseHistory = function(recommender) {
 		var totalInCommon = 0;
-		for (var i = 0; i < recommender.length; i++) {
-			if (userPurchaseHistory.indexOf(recommender.purchaseHistory[i]) !== -1 && gamesNotInCommon.indexOf(recommender.purchaseHistory[i]) !== -1) {
+		for (var i = 0; i < recommender.purchaseHistory.length; i++) {
+			if (userPurchaseHistory.indexOf(recommender.purchaseHistory[i]) !== -1) {
 				totalInCommon++;
-			} else {
+			} else if(gamesNotInCommon.indexOf(recommender.purchaseHistory[i]) === -1) {
 				gamesNotInCommon.push(recommender.purchaseHistory[i]);
 			}
 		}
@@ -25,13 +25,13 @@ var getRecommendations = function(id) {
 	var compareFunc = function(a, b) {
 		a.similarity = comparePurchaseHistory(a);
 		b.similarity = comparePurchaseHistory(b);
-		return a.similarity - b.similarity;
+		return b.similarity - a.similarity;
 	};
 
 	var gameRecommendationValue = function(game) {
 		var totalInCommon = 0;
 		for (var i = 0; i < allUsers.length; i++) {
-			if (allUsers[i].indexOf(game) !== -1) {
+			if (allUsers[i].purchaseHistory.indexOf(game) !== -1) {
 				totalInCommon += allUsers[i].similarity;
 			}
 		}
@@ -39,7 +39,7 @@ var getRecommendations = function(id) {
 
 
 	var compareGameFunc = function(a, b) {
-		return gameRecommendationValue(a._id) - gameRecommendationValue(b._id);
+		return gameRecommendationValue(b._id) - gameRecommendationValue(a._id);
 	};
 
 	return User.findById(id)
@@ -48,23 +48,19 @@ var getRecommendations = function(id) {
 		return User.find({});
 	})
 	.then(function(users) {
-		console.log(users);
 		users.map(function(user) {
-			console.log(typeof(user._id));
 			allUsers.push({id: user._id, purchaseHistory: user.purchaseHistory});
 		});
 	})
 	.then(function() {
-		console.log(typeof(allUsers[0]));
 		allUsers.sort(compareFunc);
-		allUsers = allUsers.slice(0, allUsers.length - 10);
-		console.log(gamesNotInCommon);
+		allUsers = allUsers.slice(0, 5);
+		console.log(allUsers, gamesNotInCommon);
 		return Game.find({_id: {$in: gamesNotInCommon}});
 	})
 	.then(function(games) {
-		console.log(games);
 		games.sort(compareGameFunc);
-		return gamesNotInCommon;
+		return games;
 	});
 };
 
