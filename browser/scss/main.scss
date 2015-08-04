@@ -103,21 +103,23 @@ hr{
 }
 
 .card{
-  
+  display: block;
+  height: 150px;
   &:hover {
     background-color: gainsboro;
   }
 
-  border-radius: 5px;
-  padding: 2%;
+  border-radius: 0px;
+  padding: 5px;
   background-color: white;
 
   img {
     margin: 1%;
   }
 
-  margin: 0.5%;
-  border: 1px solid black;
+  margin: 0%;
+  border: 1px solid grey;
+  overflow: hidden;
 
   .glyphicon{
     .glyphicon-remove-sign {
