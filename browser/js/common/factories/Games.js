@@ -16,10 +16,18 @@ app.factory('Games', function ($http, AuthService) {
 		},
 
 		getReviews: function(id){
-			return $http.get('/api/games/'+id+'/reviews')
+			return $http.get('/api/games/'+ id +'/reviews')
 			.then(function(review){
-				console.log(review.data)
+				console.log(review.data);
 				return review.data
+			});
+		},
+
+		deleteGame: function(id){
+			return $http.delete('/api/games' + id)
+			.then(function(game){
+				console.log(game.data);
+				return game.data;
 			});
 		},
 

@@ -91,6 +91,38 @@ hr{
 
 }
 
+.admin-container {
+  margin-left: 10%;
+  width: 100%;
+}
+
+.card{
+  
+  &:hover {
+    background-color: gainsboro;
+  }
+
+  border-radius: 5px;
+  padding: 2%;
+  background-color: white;
+
+  img {
+    margin: 1%;
+  }
+
+  margin: 0.5%;
+  border: 1px solid black;
+
+  .glyphicon-remove-sign {
+    margin-left: 3%;
+    color: #600;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+
+}
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
