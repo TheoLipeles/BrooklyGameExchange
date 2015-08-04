@@ -49,20 +49,20 @@ function getGame(url) {
 			});
 			
 			http.get(url.slice(0, url.length - 9), function(res) {
-				Game.create(game).then(function(game) {
-					var reviews = "";
-					res.on("data", function(chunk) {
-						reviews += chunk;
-					});
-					res.on("end", function() {
-						reviews = JSON.parse(reviews);
-						game.downloadLink = reviews.d1 + "" + reviews.dir + "/" + url.match(/metadata\/msdos_(.*)\/metadata/)[1] + ".zip";
+				var reviews = "";
+				res.on("data", function(chunk) {
+					reviews += chunk;
+				});
+				res.on("end", function() {
+					reviews = JSON.parse(reviews);
+					game.downloadLink = "http://" + reviews.d1 + "" + reviews.dir + "/" + url.match(/metadata\/msdos_(.*)\/metadata/)[1] + ".zip";
+					Game.create(game).then(function(game) {
 						parseReviews(reviews.reviews, game);
 					});
 				});
 			});
 		});
-	});
+});
 
 var makeDeveloperIfNonExistent = function(name) {
 	return User.findById({name: name})
@@ -114,18 +114,18 @@ var parseReviews = function(reviews, game) {
 				// 	done(game);
 				// };
 
-			Review.create(reviews).then(function(reviews) {
+				Review.create(reviews).then(function(reviews) {
 				// for (var review = 0; review < reviews.length; review++) {
 				// 	var currentReview = reviews[review];
 				// 	reviewIds.push(currentReview._id);
 				// }
 			});
-		});
+			});
 	}
 };
 
-	var done = function(game) {
-	};
+var done = function(game) {
+};
 
 };
 
