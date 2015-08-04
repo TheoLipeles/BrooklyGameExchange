@@ -11,8 +11,14 @@ app.factory('User', function ($http) {
 		getOne: function(id){
 			return $http.get('/api/users/'+ id)
 			.then(function(user){
-				console.log(user);
 				return user.data;
+			});
+		},
+
+		deleteUser: function(id){
+			return $http.delete('/api/users/' + id)
+			.then(function(deletedUser){
+				return deletedUser.data;
 			});
 		},
 
@@ -49,7 +55,6 @@ app.factory('User', function ($http) {
 		},
 
 		postReview: function(id, review) {
-			console.log("posting from",id,"with",review)
 			return $http.post('/api/users/'+ id + '/reviews', review)
 			.then(function(savedReview){
 				console.log("review saved:",savedReview)
@@ -65,17 +70,14 @@ app.factory('User', function ($http) {
 		},
 
 		buyGames: function(id, games) {
-			// console.log(games)
 			var justGame = games.map(function(elem){
 				return elem.game._id}
 				)
-			// console.log(gameIds)
 			return $http.post('/api/users/'+id+'/checkout', justGame)
 			.then(function(games){
 				return games.data;
 			});
 		}
-
 
 	};
 
