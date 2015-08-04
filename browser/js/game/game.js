@@ -39,6 +39,7 @@ app.controller('GameCtrl', function ($scope, $stateParams, Games, AuthService, U
 		for (var i = 0; i < $scope.reviews.length; i++){
 			revSum += parseInt($scope.reviews[i].rating);
 		}
+		console.log(revSum);
 		$scope.avgRatingGame = Math.floor(revSum / $scope.reviews.length);
 	};
 
