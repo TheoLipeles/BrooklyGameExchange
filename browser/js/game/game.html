@@ -3,7 +3,7 @@
 		<div class="col col-md-8">
 			<img class ="smallImg thumbnail" ng-repeat="screenshot in thisGame.screenshots" src="{{screenshot}}"></img></br>
 			<div id="titleAndStuff">
-				<h1>{{thisGame.title}} <span ng-hide="isAdmin()" ng-clic k="deleteGame(thisGame._id)" class="glyphicon glyphicon-remove-sign"></span></h1>			
+				<h1>{{thisGame.title}} <span ng-hide="isAdmin()" ng-click="deleteGame(thisGame._id)" class="glyphicon glyphicon-remove-sign"></span></h1>			
 
 				<div ng-controller="ModalCtrl" class="modalButton">
 					<script type="text/ng-template" id="myModalContent.html">
