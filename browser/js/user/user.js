@@ -24,7 +24,6 @@ app.config(function ($stateProvider) {
 
 app.controller("UserCtrl", function($scope, User, Games, admin, users){
     $scope.users = users;
-    console.log("all the users", $scope.users);
 
     $scope.deleteUser = function(id) {
         User.deleteUser(id)

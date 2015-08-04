@@ -9,16 +9,10 @@
 				<single-game-thumb ui-sref='agame({id: game._id})' ng-repeat="game in user.purchaseHistory"></single-game-thumb>
 				<h3>My Reviews:</h3><br>
 				<single-review ng-repeat="review in user.reviews"></single-review>
-<!-- 		<div ng-show="true" class="dev-panel">
-			<h2>Upload New Game</h2><button>PLUS</button>
-		</div> -->
-	</div>
+			</div>
+		</div>
 	<div class="recommendations col-lg-4">	
 		<h3>My Recommendations:</h3>
 		<single-game-thumb ui-sref='agame({id: game._id})' ng-repeat="game in user.recommendations"></single-game-thumb>
 	</div>
-<!-- 	<div ng-show='isAdmin' class="admin-panel">
-		<h2><single-user ng-repeat="user in users" ui-sref="profile({id: user._id})"></single-user></h2>
-	</div> -->
-	<div>
-		<pre spacing="default">{{user | json}}</pre>
+</div>

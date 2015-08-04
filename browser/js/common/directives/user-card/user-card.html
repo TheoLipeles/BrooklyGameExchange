@@ -2,7 +2,8 @@
 	<img ng-src="{{user.photo}}" width="50"><img>
 	<p>Member since: {{Math.floor((Math.random() * 100) + 1900)}}</p>
 	<p>User name: {{user.name}}</p> 
-		<a ui-sref="profile({id: user._id})">{{user.email}}</a><span ng-click="deleteUser(user._id)" class="glyphicon glyphicon-remove-sign"></span>
+		<a ui-sref="profile({id: user._id})">{{user.email}}</a><span 
+		ng-click="deleteUser(user._id)" class="glyphicon glyphicon-remove-sign"></span>
 </div>
 
 
