@@ -125,10 +125,7 @@ router.post('/:id/reviews',
         req.body.author = req.params.id;
         Review.create(req.body)
         .then(function(review){
-            review.save()
-            .then(function(){
-                res.json(201,review);   
-            });
+            res.json(201,review);
         })
         .then(null, function(err){
             console.log(err);

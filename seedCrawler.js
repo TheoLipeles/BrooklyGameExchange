@@ -114,18 +114,18 @@ var parseReviews = function(reviews, game) {
 				// 	done(game);
 				// };
 
-				Review.create(reviews).then(function(reviews) {
-					// for (var review = 0; review < reviews.length; review++) {
-					// 	var currentReview = reviews[review];
-					// 	reviewIds.push(currentReview._id);
-					// }
-				});
+			Review.create(reviews).then(function(reviews) {
+				// for (var review = 0; review < reviews.length; review++) {
+				// 	var currentReview = reviews[review];
+				// 	reviewIds.push(currentReview._id);
+				// }
 			});
+		});
 	}
 };
 
-var done = function(game) {
-};
+	var done = function(game) {
+	};
 
 };
 
