@@ -15,6 +15,7 @@
 	</div>
 	<div class="recommendations col-lg-4">	
 		<h3>My Recommendations:</h3>
+		<single-game-thumb ui-sref='agame({id: game._id})' ng-repeat="game in user.recommendations"></single-game-thumb>
 	</div>
 <!-- 	<div ng-show='isAdmin' class="admin-panel">
 		<h2><single-user ng-repeat="user in users" ui-sref="profile({id: user._id})"></single-user></h2>
