@@ -6,19 +6,27 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state) 
         templateUrl: 'js/common/directives/navbar/navbar.html',
         link: function (scope) {
 
+            scope.isLoggedIn = function () {
+                return AuthService.isAuthenticated();
+            };
+
             scope.items = [
                 { label: 'HOME', state: 'home'},
                 { label: 'BROWSE GAMES', state: 'browse'},
                 { label: 'BROWSE DEVELOPERS', state: 'developers'},
-                { label: 'DEV -BOARD', state: 'dash', auth: true},
-                { label: 'ADMIN -BOARD', state: 'user', auth: true},
-                { label: 'MY PROFILE', state: 'profile({id: user._id})', auth: true}
+                { label: 'MY PROFILE', state: 'profile({id: user._id})'},
+                { label: 'DEV -BOARD', state: 'dash'},
+                { label: 'ADMIN -BOARD', state: 'user'}
             ];
 
             scope.user = null;
 
-            scope.isLoggedIn = function () {
-                return AuthService.isAuthenticated();
+            scope.isAdmin = function() {
+                return AuthService.isAdmin();
+            };
+
+            scope.isDev = function() {
+                return AuthService.isDev();
             };
 
             scope.logout = function () {

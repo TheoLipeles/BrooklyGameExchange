@@ -15,9 +15,19 @@ app.config(function ($stateProvider) {
 app.controller('DevDashCtrl',function ($scope, User, user, AuthService){
 	$scope._ = _;
 	$scope.user = user;
-	$scope.newGame = {
-		screenshots: ['http://vignette3.wikia.nocookie.net/wowwiki/images/7/75/Captain_Placeholder.jpg/revision/latest?cb=20070324064719']
+    $scope.reset = function() {
+    	$scope.newGame = {
+        	title: null,
+        	description: null,
+        	genre: null,
+        	screenshot: ['http://vignette3.wikia.nocookie.net/wowwiki/images/7/75/Captain_Placeholder.jpg/revision/latest?cb=20070324064719'],
+        	minPrice: null,
+        	downloadLink: null
+    	};
 	};
+
+	$scope.reset();
+
 	var updateUser = function() {
 		User.getOne(user._id).then(function(dev) {
 			$scope.user = dev;
@@ -44,23 +54,12 @@ app.controller('DevDashCtrl',function ($scope, User, user, AuthService){
 				var gameAvg = gameSum / game.reviews.length;
 				devSum += gameAvg;
 			}
-			$scope.avgRating = Math.floor(devSum / games.length);
+			$scope.avgRating = Math.floor(devSum / games.length) || 0;
 		});
 	};
 
 	updateUser();
 	avgRatingDev($scope.user._id);
-
-    $scope.reset = function() {
-    	$scope.newGame = {
-        	title: null,
-        	description: null,
-        	genre: null,
-        	screenshot: false,
-        	minPrice: null,
-        	downloadLink: null
-    	};
-	};
 
 	$scope.postGame = function(){
 		User.postGame(user._id, $scope.newGame)
