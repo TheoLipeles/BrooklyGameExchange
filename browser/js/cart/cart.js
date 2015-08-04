@@ -10,27 +10,36 @@ app.config(function ($stateProvider) {
 
 app.controller('CartCtrl', function ($scope, $stateParams, User, Games, $state, $cookies, AuthService){
 	
+	$scope.signedIn = $stateParams.length > 0;
 
 	var getCart = function(){
-		if (AuthService.isAuthenticated()) {
+		console.log($scope.signedIn);
+		if ($scope.signedIn) {
 			return User.getOne($stateParams.id)
 			.then(function(user) {
 				$scope.name = user.name;
 				$scope.cart = user.cart || [];
+			}).then(null, function() {
+				$scope.cart = [];
 			});
 		} else {
-			$scope.cart = JSON.parse($cookies.get("cart"));
-			var setGame = function(game) {
-				for (var i = 0; i < $scope.cart.length; i++) {
-					if ($scope.cart[i].game == game._id) {
-						$scope.cart[i].game = game;
+			$scope.cart = $cookies.get("cart");
+			if ($scope.cart) {
+					$scope.cart = JSON.parse($scope.cart);
+				var setGame = function(game) {
+					for (var i = 0; i < $scope.cart.length; i++) {
+						if ($scope.cart[i].game == game._id) {
+							$scope.cart[i].game = game;
+						}
 					}
+				};
+				for (var i = 0; i < $scope.cart.length; i++) {
+					console.log($scope.cart[i], i);
+					Games.getOne($scope.cart[i].game)
+					.then(setGame);
 				}
-			};
-			for (var i = 0; i < $scope.cart.length; i++) {
-				console.log($scope.cart[i], i);
-				Games.getOne($scope.cart[i].game)
-				.then(setGame);
+			} else {
+				$scope.cart = [];
 			}
 		}
 	};
@@ -38,10 +47,10 @@ app.controller('CartCtrl', function ($scope, $stateParams, User, Games, $state, 
 	getCart();
 
 	$scope.getTotal = function() {
-		// console.log("$scope.cart", $scope.cart);
+		console.log("$scope.cart", $scope.cart);
 		var total = 0;
 		for(var i = 0; i < $scope.cart.length; i++) {
-			total+=$scope.cart[i].price;
+			total += $scope.cart[i].price;
 		}
 		return total;
 	};
@@ -55,7 +64,7 @@ app.controller('CartCtrl', function ($scope, $stateParams, User, Games, $state, 
 	};
 
 	$scope.deleteItem = function(itemId){
-		if (AuthService.isAuthenticated()) {
+		if ($scope.signedIn) {
 			Games.removeFromCart(itemId)
 			.then(function(){
 				getCart();	
