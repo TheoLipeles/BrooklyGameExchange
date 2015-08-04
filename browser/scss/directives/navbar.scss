@@ -19,7 +19,7 @@ navbar {
   }
 
   a {
-    color: lightgrey;
+    color: #9eb6b6;
     font-size: 16px;
   }
 
@@ -27,11 +27,11 @@ navbar {
     cursor: pointer;
     transition: color 0.2s;
     &.active {
-      color: darken(lightgrey, 10%);
+      color: white;
     }
     &:hover {
       background: none;
-      color: #f31214;
+      color: white;
     }
     &:focus {
       background: none;
