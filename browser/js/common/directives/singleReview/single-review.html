@@ -1,6 +1,6 @@
 <hr>
 {{review.game.title}}</br>
-<img src='{{review.author.photo}}' id="avatar"></img><h4>{{review.title}}</h4></br>
+<img ng-src='{{review.author.photo}}' id="avatar"></img><h4>{{review.title}}</h4></br>
 
 <div class="rating">
 	<span ng-repeat="rating in _.range(1, review.rating+1)">★</span><span ng-repeat="rating in _.range(1,5-review.rating+1)">☆</span>

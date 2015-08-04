@@ -1,10 +1,10 @@
 app.config(function ($stateProvider) {
 
-    $stateProvider.state('browse', {
-        url: '/browse',
-        templateUrl: 'js/browse/browse.html',
-        controller: 'BrowseCtrl'
-    });
+	$stateProvider.state('browse', {
+		url: '/browse',
+		templateUrl: 'js/browse/browse.html',
+		controller: 'BrowseCtrl'
+	});
 
 });
 
@@ -24,14 +24,13 @@ app.controller('BrowseCtrl', function ($scope,$state,Games){
 		console.log('error', err)
 	});
 
-	$scope.game = Games.getOne();
 
 	$scope.sortBy = function(predicate){
 		if (predicate === $scope.sortMethod){
 			$scope.sortMethod = "-" + predicate;
 		}
 		else{
-		$scope.sortMethod = predicate;
+			$scope.sortMethod = predicate;
 		}
 		console.log($scope.sortMethod)
 

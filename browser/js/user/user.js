@@ -61,6 +61,7 @@ app.controller("UserProfileCtrl", function($scope, $stateParams, User, AuthServi
 
     User.getRecommendations($stateParams.id)
     .then(function(games) {
+        console.log("games", games);
         $scope.user.recommendations = games;
     });
 
