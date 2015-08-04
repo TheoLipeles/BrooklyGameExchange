@@ -39,23 +39,6 @@ app.controller("UserCtrl", function($scope, User, Games, admin){
         console.log(err);
     });
 
-    Games.getAll()
-    .then(function(games){
-        $scope.games = games;
-        $scope.games.deleteUser = function(id) {
-            User.deleteUser(id)
-            .then(function(deletedUser){
-                $scope.users = $scope.users.filter(function(user){
-                    return user._id !== deletedUser._id
-                });
-            });
-        };
-    })
-    .then(null, function(err){
-        console.log(err);
-    });
-
-
 });
 
 app.controller("UserProfileCtrl", function($scope, $stateParams, User, AuthService){

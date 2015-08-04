@@ -3,14 +3,15 @@ app.config(function ($stateProvider) {
 	$stateProvider.state('agame', {
 		url: '/game/:id',
 		templateUrl: 'js/game/game.html',
-		controller: 'GameCtrl'
-
+		controller: 'GameCtrl',
+		resolve: {
+			isAdmin: function(AuthService) {return AuthService.getLoggedInUser().isAdmin}
+		}
 	});
-
 });
 
-app.controller('GameCtrl', function ($scope, $stateParams, Games, AuthService, User){
-
+app.controller('GameCtrl', function ($scope, $stateParams, Games, AuthService, User, isAdmin, $state){
+	$scope.isAdmin = isAdmin;
 	$scope.newReview = {};
 
 	Games.getOne($stateParams.id)
@@ -39,8 +40,7 @@ app.controller('GameCtrl', function ($scope, $stateParams, Games, AuthService, U
 		for (var i = 0; i < $scope.reviews.length; i++){
 			revSum += parseInt($scope.reviews[i].rating);
 		}
-		console.log(revSum);
-		$scope.avgRatingGame = Math.floor(revSum / $scope.reviews.length);
+		$scope.avgRatingGame = Math.floor(revSum / $scope.reviews.length) || 0;
 	};
 
 	$scope.updateReviews();
@@ -62,6 +62,14 @@ app.controller('GameCtrl', function ($scope, $stateParams, Games, AuthService, U
 		});
 
 	};
+
+	$scope.deleteGame = function(id) {
+		Games.deleteGame(id)
+		.then(function(deletedGame){
+			$state.go('browse');
+		})
+	}
+
 });
 
 app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, Games, $stateParams) {

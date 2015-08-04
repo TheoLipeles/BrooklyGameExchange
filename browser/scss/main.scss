@@ -113,9 +113,10 @@ hr{
   margin: 0.5%;
   border: 1px solid black;
 
-  .glyphicon-remove-sign {
-    margin-left: 3%;
-    color: #600;
+  .glyphicon{
+    .glyphicon-remove-sign {
+      margin-left: 3%;
+      color: #600;
     &:hover{
       cursor: pointer;
     }

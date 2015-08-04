@@ -24,7 +24,7 @@ app.factory('Games', function ($http, AuthService) {
 		},
 
 		deleteGame: function(id){
-			return $http.delete('/api/games' + id)
+			return $http.delete('/api/games/' + id)
 			.then(function(game){
 				console.log(game.data);
 				return game.data;
