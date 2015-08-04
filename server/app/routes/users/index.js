@@ -42,7 +42,7 @@ router.get('/developers', function(req, res, next) {
 
 //GET single user
 router.get('/:id', function (req, res, next) {
-    User.findById(req.params.id).deepPopulate("createdGames reviews.game cart.game.developer").exec()
+    User.findById(req.params.id).deepPopulate("createdGames purchaseHistory reviews.game cart.game.developer").exec()
     .then(function(user) {
         console.log(user);
         res.json(user);
