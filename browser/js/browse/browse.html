@@ -5,8 +5,4 @@
 	<div id = "bigcontainer">
 		<single-game-thumb ng-repeat="game in gamesList | orderBy : sortMethod | filter: search.query" ></single-game-thumb>
 	</div>
-
-	<pre spacing="default">{{gamesList | json}}</pre>
-
-
 </div>

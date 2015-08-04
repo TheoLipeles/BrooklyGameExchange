@@ -6,7 +6,7 @@
 	<div>
 	<div class="stats col-lg-8">
 		<h3>My Games:</h3><br>
-			<single-game-thumb ui-sref='agame({id: game._id})' ng-repeat="game in user.createdGames"></single-game-thumb>
+			<single-game-thumb ui-sref='agame({id: game._id})' ng-repeat="game in user.purchaseHistory"></single-game-thumb>
 		<h3>My Reviews:</h3><br>
 			<single-review ng-repeat="review in user.reviews"></single-review>
 <!-- 		<div ng-show="true" class="dev-panel">

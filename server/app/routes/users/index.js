@@ -54,7 +54,7 @@ router.get('/:id', function (req, res, next) {
 
 //GET all games created by a single developer
 router.get('/:id/games', function (req, res, next) {
-    Game.find({developer: req.params.id})
+    Game.find({developer: req.params.id}).populate("reviews").exec()
     .then(function(games){
         res.json(games);   
     })
