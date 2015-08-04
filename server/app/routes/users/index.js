@@ -151,6 +151,33 @@ router.delete('/:id/cart/:itemId',
         });
     });
 
+router.delete('/:id/cart/',
+    function(req,res,next){
+        return User.findByIdAndUpdate(req.params.id, {$set: {cart: []}})
+        .exec()
+        .then(function(cart){
+            console.log('cart cleared')
+            res.sendStatus(204)
+        })
+        .then(null, function(err){
+            next(err);
+        });
+    })
+
+router.post('/:id/checkout',
+    function(req,res,next){
+        console.log("checkout from",req.params.id, req.body)
+        return User.findByIdAndUpdate(req.params.id, {$push: {purchaseHistory: {$each: req.body} } }, {new: true, safe: true} )
+        .exec()
+        .then(function(user){
+            console.log("user.findbyidandupdate worked!!",user)
+            res.send(200,user)
+        })
+        .then(null,function(err) {
+            next(err);
+        });
+    });
+
 
 
 
