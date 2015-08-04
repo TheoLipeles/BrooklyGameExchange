@@ -28,83 +28,83 @@ User.remove({}, function(err) {
 function getGame(url) {
 	var game = {};
 	http.get(url, function(res) {
-	    var body = "";
-	    res.on("data", function(chunk) {
-	    	body += chunk;
-	    });
-	    res.on("end", function() {
-	    	body = JSON.parse(body).result;
-	    	game.title = body.title;
-	    	game.description = body.description;
-	    	if (body.description) {
-		    	var possibleGenre = body.description.match(/<b>Genre<\/b>\s*(\w*)\s*<\/p>/);
-		    	if (possibleGenre) {
-			    	game.genre = possibleGenre[1];
-			    	console.log(game.genre);
-		    	}
-	    	}
-	    	game.screenshots = ["http://archive.org/services/img/" + url.match(/metadata\/(.*)\/metadata/)[1]];
-	    	makeDeveloperIfNonExistent(body.creator).then(function(dev) {
-	    		game.developer = dev._id;
-	    	});
-	    	
-	    	http.get(url.slice(0, url.length - 9), function(res) {
-	    		Game.create(game).then(function(game) {
-		    		var reviews = "";
-				    res.on("data", function(chunk) {
-				    	reviews += chunk;
-				    });
-				    res.on("end", function() {
-				    	reviews = JSON.parse(reviews);
-				    	game.downloadLink = reviews.d1 + "" + reviews.dir + "/" + url.match(/metadata\/msdos_(.*)\/metadata/)[1] + ".zip";
-				    	parseReviews(reviews.reviews, game);
-		    		});
-				});
-	    	});
+		var body = "";
+		res.on("data", function(chunk) {
+			body += chunk;
 		});
-	});
-
-	var makeDeveloperIfNonExistent = function(name) {
-		return User.findById({name: name})
-			.then(function(dev) {
+		res.on("end", function() {
+			body = JSON.parse(body).result;
+			game.title = body.title;
+			game.description = body.description;
+			if (body.description) {
+				var possibleGenre = body.description.match(/<b>Genre<\/b>\s*(\w*)\s*<\/p>/);
+				if (possibleGenre) {
+					game.genre = possibleGenre[1];
+					console.log(game.genre);
+				}
+			}
+			game.screenshots = ["http://archive.org/services/img/" + url.match(/metadata\/(.*)\/metadata/)[1]];
+			makeDeveloperIfNonExistent(body.creator).then(function(dev) {
 				game.developer = dev._id;
-				console.log("Developer exists", name);
-			})
-			.then(null, function() {
-				return User.create({name: name, email: faker.internet.email(), password: "supersecurefakepassword", isDev: true});
 			});
-	};
-
-	var makeUserIfNonExistent = function(name) {
-		return User.findById({name: name})
-			.then(function(dev) {
-				console.log("User exists", name);
-			})
-			.then(null, function() {
-				return User.create({name: name, email: faker.internet.email(), password: "supersecurefakepassword"});
-			});
-	};
-
-	var saveReview = function(review, cb) {
-		review.save();
-		cb();
-	};
-
-	var parseReviews = function(reviews, game) {
-		if (reviews) {
-			async.map(reviews.slice(0, 10), function(review, cb) {
-				makeUserIfNonExistent(review.reviewer).then(function(user) {
-					review.author = user._id;
-					cb(null, {
-						title: review.reviewtitle,
-						text: review.reviewbody,
-						rating: review.stars,
-						author: review.author,
-						game: game._id
+			
+			http.get(url.slice(0, url.length - 9), function(res) {
+				var reviews = "";
+				res.on("data", function(chunk) {
+					reviews += chunk;
+				});
+				res.on("end", function() {
+					reviews = JSON.parse(reviews);
+					game.downloadLink = "http://" + reviews.d1 + "" + reviews.dir + "/" + url.match(/metadata\/msdos_(.*)\/metadata/)[1] + ".zip";
+					Game.create(game).then(function(game) {
+						parseReviews(reviews.reviews, game);
 					});
 				});
-				
-			}, function(err, reviews) {
+			});
+		});
+});
+
+var makeDeveloperIfNonExistent = function(name) {
+	return User.findById({name: name})
+	.then(function(dev) {
+		game.developer = dev._id;
+		console.log("Developer exists", name);
+	})
+	.then(null, function() {
+		return User.create({name: name, email: faker.internet.email(), password: "supersecurefakepassword", isDev: true});
+	});
+};
+
+var makeUserIfNonExistent = function(name) {
+	return User.findById({name: name})
+	.then(function(dev) {
+		console.log("User exists", name);
+	})
+	.then(null, function() {
+		return User.create({name: name, email: faker.internet.email(), password: "supersecurefakepassword"});
+	});
+};
+
+var saveReview = function(review, cb) {
+	review.save();
+	cb();
+};
+
+var parseReviews = function(reviews, game) {
+	if (reviews) {
+		async.map(reviews.slice(0, 10), function(review, cb) {
+			makeUserIfNonExistent(review.reviewer).then(function(user) {
+				review.author = user._id;
+				cb(null, {
+					title: review.reviewtitle,
+					text: review.reviewbody,
+					rating: review.stars,
+					author: review.author,
+					game: game._id
+				});
+			});
+			
+		}, function(err, reviews) {
 
 				// var reviewIds = [];
 				// var reviewsQueue = async.queue(saveReview, 10);
@@ -115,17 +115,17 @@ function getGame(url) {
 				// };
 
 				Review.create(reviews).then(function(reviews) {
-					// for (var review = 0; review < reviews.length; review++) {
-					// 	var currentReview = reviews[review];
-					// 	reviewIds.push(currentReview._id);
-					// }
-				});
+				// for (var review = 0; review < reviews.length; review++) {
+				// 	var currentReview = reviews[review];
+				// 	reviewIds.push(currentReview._id);
+				// }
 			});
-		}
-	};
+			});
+	}
+};
 
-	var done = function(game) {
-	};
+var done = function(game) {
+};
 
 };
 
@@ -134,4 +134,3 @@ var urls = [{"identifier":"msdos_Universe_1987"},{"identifier":"msdos_Death_Brin
 for (var i = 0; i < urls.length; i++) {
 	getGame("http://archive.org/metadata/" + urls[i].identifier + "/metadata");
 }
-
