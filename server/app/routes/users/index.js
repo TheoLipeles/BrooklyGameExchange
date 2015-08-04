@@ -140,7 +140,7 @@ router.post('/:id/reviews',
 //post game to cart
 router.post('/:id/cart/',
     function (req, res, next) {
-        User.findByIdAndUpdate(req.params.id, {$addToSet: {cart: {game: req.body.id, price: parseInt(req.body.price)} } 
+        User.findByIdAndUpdate(req.params.id, {$addToSet: {cart: {_id: req.body.id, game: req.body.id, price: parseInt(req.body.price)} } 
     })
         .then(function() {
             res.sendStatus(201);
