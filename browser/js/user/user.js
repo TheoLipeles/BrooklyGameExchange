@@ -1,12 +1,15 @@
 app.config(function ($stateProvider) {
     $stateProvider.state('user', {
         url: '/user',
-        templateUrl: '/js/user/user.html',
+        templateUrl: '/js/user/admin.html',
         controller: 'UserCtrl',
         // The following data.authenticate is read by an event listener
         // that controls access to this state. Refer to app.js.
         data: {
             authenticate: true
+        },
+        resolve: {
+            admin: function(AuthService){return AuthService.getLoggedInUser()} 
         }
     });
 
@@ -18,7 +21,9 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller("UserCtrl", function($scope, User){
+app.controller("UserCtrl", function($scope, User, Games, admin){
+    $scope.admin = admin;
+
     User.getAll()
     .then(function(users){
         $scope.users = users;
@@ -26,6 +31,14 @@ app.controller("UserCtrl", function($scope, User){
     .then(null, function(err){
         console.log(err);
     });
+
+    Games.getAll()
+    .then(function(games){
+        $scope.admin.games = games;
+    })
+    .then(null, function(err){
+        console.log(err);
+    })
 });
 
 app.controller("UserProfileCtrl", function($scope, $stateParams, User, AuthService){
