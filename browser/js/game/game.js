@@ -5,13 +5,13 @@ app.config(function ($stateProvider) {
 		templateUrl: 'js/game/game.html',
 		controller: 'GameCtrl',
 		resolve: {
-			isAdmin: function(AuthService) {return AuthService.getLoggedInUser().isAdmin}
+			user: function(AuthService) {return AuthService.getLoggedInUser()}
 		}
 	});
 });
 
-app.controller('GameCtrl', function ($scope, $stateParams, Games, AuthService, User, isAdmin, $state){
-	$scope.isAdmin = isAdmin;
+app.controller('GameCtrl', function ($scope, $stateParams, Games, AuthService, User, user, $state){
+	$scope.user = user;
 	$scope.newReview = {};
 
 	Games.getOne($stateParams.id)
@@ -52,8 +52,6 @@ app.controller('GameCtrl', function ($scope, $stateParams, Games, AuthService, U
 	$scope.postReview = function(){
 		//this should be in the resolve of the state but I couldn't get it to work
 		AuthService.getLoggedInUser().then(function(user){
-			// console.log(user)
-
 			User.postReview(user._id, $scope.newReview)
 			.then(function(){
 				$scope.updateReviews();
@@ -67,8 +65,8 @@ app.controller('GameCtrl', function ($scope, $stateParams, Games, AuthService, U
 		Games.deleteGame(id)
 		.then(function(deletedGame){
 			$state.go('browse');
-		})
-	}
+		});
+	};
 
 });
 

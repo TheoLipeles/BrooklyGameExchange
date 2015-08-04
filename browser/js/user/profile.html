@@ -12,13 +12,16 @@
 				<h3 ng-show="user.reviews.length > 0">My Reviews:</h3><br>
 				<single-review ng-repeat="review in user.reviews"></single-review>
 
+
 		</div>		
 	</div>
+
 
 	<div class="recommendations col-lg-4">	
 		<h3>My Recommendations:</h3>
 		<span ng-show='user.recommendations.length == 0'>You have no recommendations! Go buy some games so we know what you're into!</span>
 		<single-game-thumb ui-sref='agame({id: game._id})' ng-repeat="game in user.recommendations"></single-game-thumb>
 	</div>
+
 
 </div>
