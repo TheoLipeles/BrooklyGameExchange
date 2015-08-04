@@ -50,6 +50,7 @@ app.factory('Games', function ($http, AuthService) {
 				return $http.put('/api/games/'+user._id+'/addDownloads', {ids: ids})
 			})
 			.then(function(game){
+				console.log('middle:', game.data)
 				return game.data
 			});
 		}

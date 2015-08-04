@@ -36,6 +36,13 @@ router.put('/:id/addDownloads', function(req,res){
 	console.log(req.body.ids)
 	Game.update({ _id: { $in: req.body.ids} },{$inc: {'downloads': 1}}).exec()
 	.then(function(games){
+		// res.send(games)
+	})
+	.then(function(){
+		return Game.find({ _id: { $in: req.body.ids} }).exec()
+	})
+	.then(function(games){
+		console.log('sent:',games)
 		res.send(games)
 	},function(err){
 		res.status(500).send(err);

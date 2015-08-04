@@ -28,109 +28,109 @@ User.remove({}, function(err) {
 function getGame(url) {
 	var game = {};
 	http.get(url, function(res) {
-	    var body = "";
-	    res.on("data", function(chunk) {
-	    	body += chunk;
-	    });
-	    res.on("end", function() {
-	    	body = JSON.parse(body).result;
-	    	game.title = body.title;
-	    	game.description = body.description;
-	    	if (body.description) {
-		    	var possibleGenre = body.description.match(/<b>Genre<\/b>\s*(\w*)\s*<\/p>/);
-		    	if (possibleGenre) {
-			    	game.genre = possibleGenre[1];
-			    	console.log(game.genre);
-		    	}
-	    	}
-	    	game.screenshots = ["http://archive.org/services/img/" + url.match(/metadata\/(.*)\/metadata/)[1]];
-	    	makeDeveloperIfNonExistent(body.creator).then(function(dev) {
-	    		game.developer = dev._id;
-	    		dev.save();
-	    	});
-	    	http.get(url.slice(0, url.length - 9), function(res) {
-	    		var reviews = "";
-			    res.on("data", function(chunk) {
-			    	reviews += chunk;
-			    });
-			    res.on("end", function() {
-			    	reviews = JSON.parse(reviews);
-			    	game.downloadLink = reviews.d1 + "" + reviews.dir + "/" + url.match(/metadata\/msdos_(.*)\/metadata/)[1] + ".zip";
-			    	parseReviews(reviews.reviews);
-	    		});
-	    	});
+		var body = "";
+		res.on("data", function(chunk) {
+			body += chunk;
+		});
+		res.on("end", function() {
+			body = JSON.parse(body).result;
+			game.title = body.title;
+			game.description = body.description;
+			if (body.description) {
+				var possibleGenre = body.description.match(/<b>Genre<\/b>\s*(\w*)\s*<\/p>/);
+				if (possibleGenre) {
+					game.genre = possibleGenre[1];
+					console.log(game.genre);
+				}
+			}
+			game.screenshots = ["http://archive.org/services/img/" + url.match(/metadata\/(.*)\/metadata/)[1]];
+			makeDeveloperIfNonExistent(body.creator).then(function(dev) {
+				game.developer = dev._id;
+				dev.save();
+			});
+			http.get(url.slice(0, url.length - 9), function(res) {
+				var reviews = "";
+				res.on("data", function(chunk) {
+					reviews += chunk;
+				});
+				res.on("end", function() {
+					reviews = JSON.parse(reviews);
+					game.downloadLink = "http://" + reviews.d1 + "" + reviews.dir + "/" + url.match(/metadata\/msdos_(.*)\/metadata/)[1] + ".zip";
+					parseReviews(reviews.reviews);
+				});
+			});
 		});
 	});
 
-	var makeDeveloperIfNonExistent = function(name) {
-		return User.findById({name: name})
-			.then(function(dev) {
-				console.log("Developer exists", name);
-			})
-			.then(null, function() {
-				return User.create({name: name, email: faker.internet.email(), password: "supersecurefakepassword", isDev: true});
+var makeDeveloperIfNonExistent = function(name) {
+	return User.findById({name: name})
+	.then(function(dev) {
+		console.log("Developer exists", name);
+	})
+	.then(null, function() {
+		return User.create({name: name, email: faker.internet.email(), password: "supersecurefakepassword", isDev: true});
+	});
+};
+
+var makeUserIfNonExistent = function(name) {
+	return User.findById({name: name})
+	.then(function(dev) {
+		console.log("User exists", name);
+	})
+	.then(null, function() {
+		return User.create({name: name, email: faker.internet.email(), password: "supersecurefakepassword"});
+	});
+};
+
+var saveReview = function(review, cb) {
+	review.save();
+	cb();
+};
+
+var parseReviews = function(reviews) {
+	if (reviews) {
+		async.map(reviews.slice(0, 1), function(review, cb) {
+			makeUserIfNonExistent(review.reviewer).then(function(user) {
+				review.author = user._id;
+				user.save();
+				cb(null, {
+					title: review.reviewtitle,
+					text: review.reviewbody,
+					rating: review.stars,
+					author: review.author
+				});
 			});
-	};
+			
+		}, function(err, reviews) {
 
-	var makeUserIfNonExistent = function(name) {
-		return User.findById({name: name})
-			.then(function(dev) {
-				console.log("User exists", name);
-			})
-			.then(null, function() {
-				return User.create({name: name, email: faker.internet.email(), password: "supersecurefakepassword"});
-			});
-	};
+			var reviewIds = [];
+			var reviewsQueue = async.queue(saveReview, 10);
+			reviewsQueue.drain = function() {
+				console.log("reviews saved");
+				game.reviews = reviewIds;
+				done(game);
+			};
 
-	var saveReview = function(review, cb) {
-		review.save();
-		cb();
-	};
-
-	var parseReviews = function(reviews) {
-		if (reviews) {
-			async.map(reviews.slice(0, 1), function(review, cb) {
-				makeUserIfNonExistent(review.reviewer).then(function(user) {
-					review.author = user._id;
-					user.save();
-					cb(null, {
-						title: review.reviewtitle,
-						text: review.reviewbody,
-						rating: review.stars,
-						author: review.author
+			Review.create(reviews).then(function(reviews) {
+				for (var review = 0; review < reviews.length; review++) {
+					var currentReview = reviews[review];
+					reviewsQueue.push(currentReview, function() {
+						reviewIds.push(currentReview._id);
 					});
-				});
-				
-			}, function(err, reviews) {
-
-				var reviewIds = [];
-				var reviewsQueue = async.queue(saveReview, 10);
-				reviewsQueue.drain = function() {
-					console.log("reviews saved");
-					game.reviews = reviewIds;
-					done(game);
-				};
-
-				Review.create(reviews).then(function(reviews) {
-					for (var review = 0; review < reviews.length; review++) {
-						var currentReview = reviews[review];
-						reviewsQueue.push(currentReview, function() {
-							reviewIds.push(currentReview._id);
-						});
-					}
-				});
-			});
-		}
-	};
-
-	var done = function(game) {
-		Game.create(game).then(function(game) {
-			User.findByIdAndUpdate(game.developer, {$push: {createdGames: game._id}}).then(function(){console.log("UPDATED DEV");});
-			game.reviews.map(function(reviewId) {
-				Review.findByIdAndUpdate(reviewId, {$set: {game: game._id}}).then(function(){console.log("UPDATED REVIEW");});
+				}
 			});
 		});
-	};
+	}
+};
+
+var done = function(game) {
+	Game.create(game).then(function(game) {
+		User.findByIdAndUpdate(game.developer, {$push: {createdGames: game._id}}).then(function(){console.log("UPDATED DEV");});
+		game.reviews.map(function(reviewId) {
+			Review.findByIdAndUpdate(reviewId, {$set: {game: game._id}}).then(function(){console.log("UPDATED REVIEW");});
+		});
+	});
+};
 
 }
 
