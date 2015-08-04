@@ -1,31 +1,37 @@
 <div class="centeredWithMaxWidth thinner">
 	<h1>{{name}}'s Cart</h1>
-	<div class="container-fluid">
-		<div class="col-xs-6 col-sm-3">
-			Screenshot
+	<div ng-show="cart.length" class="panel panel-default addPadding">
+		<div class="container-fluid">
+			<div class="col-xs-6 col-sm-3">
+				Screenshot
+			</div>
+			<div class="col-xs-6 col-sm-6 cartItem">
+				Description
+			</div>
+			<div class="col-xs-6 col-sm-3">
+				Price
+			</div>
 		</div>
-		<div class="col-xs-6 col-sm-6 cartItem">
-			Description
-		</div>
-		<div class="col-xs-6 col-sm-3">
-			Price
+
+
+		<cartitem ng-repeat="item in cart"></cartitem>
+
+			<hr>
+		<div class="container-fluid">
+			<div class="col-xs-6 col-sm-3">
+				
+			</div>
+			<div class="col-xs-6 col-sm-6 cartItem">
+				
+			</div>
+			<div class="col-xs-6 col-sm-3">
+				Total: <span class="label label-default">${{getTotal()}}</span></br>
+			</br>
+				<button class="btn btn-success" ng-click="checkOut()"> Check out ➔</button>
+			</div>
 		</div>
 	</div>
-
-
-	<cartitem ng-repeat="item in cart"></cartitem>
-
-	<div class="container-fluid">
-		<div class="col-xs-6 col-sm-3">
-			
-		</div>
-		<div class="col-xs-6 col-sm-6 cartItem">
-			
-		</div>
-		<div class="col-xs-6 col-sm-3">
-			Total: ${{getTotal()}}
-		</div>
-	</div>
+	<div ng-show="!!!cart.length"><h3>Your cart is empty! Go <span ui-sref="browse">buy some games!</span></h3></div>
 </br>
 <!-- <pre>Your Cart Total is {{getTotal()}}</pre> -->
-<pre spacing="default">{{cart | json}}</pre>
+

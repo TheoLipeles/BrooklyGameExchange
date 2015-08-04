@@ -1,45 +1,43 @@
-<div class="centeredWithMaxWidth thinner" controller="GameCtrl">
-	<div id="topHalf">
-		<div id="gameHolder">
-			<h1>{{thisGame.title}}</h1>
-			A game by {{thisGame.developer.name}}</br>
-			<img ng-repeat="screenshot in thisGame.screenshots" src="{{screenshot}}"></img></br>
-			{{thisGame.description}}
+<div class="centeredWithMaxWidth thinner">
+	<div class="holder">
+		<div class="col col-md-8">
+			<img class ="smallImg thumbnail" ng-repeat="screenshot in thisGame.screenshots" src="{{screenshot}}"></img></br>
+			<div id="titleAndStuff">
+				<h1>{{thisGame.title}} <span ng-hide="isAdmin()" ng-click="deleteGame(thisGame._id)" class="glyphicon glyphicon-remove-sign"></span></h1>			
+
+				<div ng-controller="ModalCtrl" class="modalButton">
+					<script type="text/ng-template" id="myModalContent.html">
+					</script>
+					<button class="btn btn-success" ng-click="open('sm')">Purchase Game</button>    
+				</div>   
+			</div>
+			<span ng-bind-html="thisGame.description.match('Description.*')[0]"{{thisGame.description}}> </span>
+			<hr>
 		</div>
-		<div id="moreInfo">
-			BUY THIS GAME?
+		<div class="col col-md-4" id="rightSide">
+			<h5>Genre: {{thisGame.genre}}</h5><h5>Developer: {{thisGame.developer.name}}</h5>
 
-			MORE LIKE THIS?
+			<h5>Average rating: {{avgRatingGame}}</h5>
+
+
+			MORE LIKE THIS:
 		</div>
-	</div>
-</br>
-
-<div ng-controller="ModalCtrl">
-	<script type="text/ng-template" id="myModalContent.html">
-	<div class="modal-header">
-	<input type="number" id="game" ng-model="game.price"></input>
-	</div>
-	<div class="modal-body">
-	</div>
-	<div class="modal-footer">
-	<button class="btn btn-primary" ng-click="ok()">Add To Cart</button>
-	<button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-	</div>
-	</script>
-	<button class="btn btn-default" ng-click="open()">Purchase Game</button>
-</div>    
 
 
-<form name="reviewForm" ng-submit="postReview()" id="reviewsForm">
-	Write a review: </br>
-	<input type="textarea" width="100" id="Title" ng-model="newReview.title" placeholder="Title (What an Experience!)"></input></br>
-	<textarea size="30" id="newReview" ng-model="newReview.text" placeholder="This game was pretty alright. I liked the part where my character did that thing"></textarea></br>
-	<input type="number" ng-model="newReview.rating" min="0" max="5" integer placeholder="3">/5
-	<span ng-show="reviewForm.rating.$error.integer">The value is not a valid integer!</span>
-</input>
-<input type="submit"></input>
-</form>
-<div id="reviews">
-	<single-review ng-repeat="review in reviews"></single-review>
-</div>
+
+
+		<form name="reviewForm" ng-submit="postReview()" id="reviewsForm">
+			Write a review: </br>
+			<input type="textarea" width="100" id="Title" ng-model="newReview.title" placeholder="Title (What an Experience!)"></input></br>
+			<textarea size="30" id="newReview" ng-model="newReview.text" placeholder="This game was pretty alright. I liked the part where my character did that thing"></textarea></br>
+			<input type="number" ng-model="newReview.rating" min="0" max="5" integer placeholder="3"></input>/5
+			<span ng-show="reviewForm.rating.$error.integer">The value is not a valid integer!</span>
+			<input type="submit"></input>
+		</form>
+
+	</div>
+
+	<div id="reviews">
+		<single-review ng-repeat="review in reviews"></single-review>
+	</div>
 </div>

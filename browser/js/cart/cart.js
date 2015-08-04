@@ -8,16 +8,20 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('CartCtrl', function ($scope, $stateParams, User, Games){
+app.controller('CartCtrl', function ($scope, $stateParams, User, Games,$state){
 	
-	User.getOne($stateParams.id)
-	.then(function(user) {
-		$scope.name = user.name;
-		$scope.cart = user.cart || [];
-	})
+	var getCart = function(){ 
+		return User.getOne($stateParams.id)
+		.then(function(user) {
+			$scope.name = user.name;
+			$scope.cart = user.cart || [];
+		})
+	};
+
+	getCart();
 
 	$scope.getTotal = function() {
-		console.log("$scope.cart", $scope.cart);
+		// console.log("$scope.cart", $scope.cart);
 		var total = 0;
 		for(var i = 0; i < $scope.cart.length; i++) {
 			total+=$scope.cart[i].price;
@@ -25,6 +29,20 @@ app.controller('CartCtrl', function ($scope, $stateParams, User, Games){
 		return total;
 	};
 
+	$scope.deleteItem = function(itemId){ 
+		Games.removeFromCart(itemId)
+		.then(function(){
+			getCart();	
+		});
+	};
 
+	$scope.checkOut = function(){
+		console.log('cart:',$scope.cart)
+		User.buyGames($stateParams.id, $scope.cart)
+		.then(function(games){
+			$state.go('confirm', {cart: $scope.cart, total: $scope.getTotal});
+			console.log("Bought",games)
+		})
+	};
 
 });

@@ -1,21 +1,28 @@
-<div class="centeredWithMaxWidth thinner">
-<h1>{{user.name}}</h1>
-<div>
-	<h3>Games you made:</h3>
+<div class="centeredWithMaxWidth thinner devBoard">
+	<h1>{{user.name}}</h1>
+	<div class="stats">
+		<h3>Total Downloads: {{totalDownloads()}}</h3>
+		<h3>Average Rating:<span ng-repeat="rating in _.range(1, avgRating + 1)">★</span><span ng-repeat="rating in _.range(1,5 - avgRating + 1)">☆</span></h3>
+	</div>
 	<hr>
-	<single-game-thumb ng-repeat="game in user.gamesCreated"></single-game-thumb>
-</div>
-<div class="newGame">
-	<h3>Add a New Game!</h3>
-	<form name="newGameForm" ng-submit="postGame()">
-		<input ng-model="newGame.title" placeholder="title" required></input></br>
-		<textarea id="description" ng-model="newGame.description" placeholder="description" required></textarea></br>
-		<input ng-model="newGame.genre" placeholder="genre" required></input></br>
-		<input ng-model="newGame.screenshots" placeholder="screenshot (url)"></input></br>
-		<input ng-model="newGame.minPrice" placeholder="minPrice (int)" type="number"></input></br>
-		<input ng-model="newGame.downloadLink" placeholder="downloadLink (url)" required></input></br>
-
-		<input class="btn btn-success" type="submit"></input>
-	</form>
-</div>
+	<div>
+		<h2>Games You've Made:</h2>
+		<single-game-thumb ng-repeat="game in user.createdGames"></single-game-thumb>
+	</div>
+	<div class="newGame">
+		<h3>Add a New Game!</h3>
+		<hr>
+		<form class="col-lg-6" name="newGameForm" ng-submit="postGame()">
+			<input ng-model="newGame.title" placeholder="title" required></input></br>
+			<textarea id="description" ng-model="newGame.description" placeholder="description" required></textarea></br>
+			<input ng-model="newGame.genre" placeholder="genre" required></input></br>
+			<input ng-model="newGame.screenshots[0]" placeholder="screenshot (url)"></input></br>
+			<input ng-model="newGame.minPrice" placeholder="minPrice (int)" type="number"></input></br>
+			<input ng-model="newGame.downloadLink" placeholder="downloadLink (url)" required></input></br>
+			<input class="btn btn-success" type="submit"></input>
+		</form>
+		<div class="screenshot col-lg-6">
+			<img ng-src="{{newGame.screenshots[0]}}"></img>
+		</div>
+	</div>
 </div>
