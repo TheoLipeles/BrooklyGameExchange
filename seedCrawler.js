@@ -134,4 +134,3 @@ var urls = [{"identifier":"msdos_Universe_1987"},{"identifier":"msdos_Death_Brin
 for (var i = 0; i < urls.length; i++) {
 	getGame("http://archive.org/metadata/" + urls[i].identifier + "/metadata");
 }
-
