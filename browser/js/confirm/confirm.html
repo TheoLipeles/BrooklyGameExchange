@@ -4,5 +4,6 @@
 <button ng-hide="games" class="btn btn-success" ng-click="okay()">Okay!</button> <button  ng-hide="games" class="btn btn-danger" ui-sref="cart({id: user._id})">Not yet!</button>
 
 <h1 ng-show="games">Congratulations! Here are your download links:</h1>
+<hr>
 <div ng-repeat="game in games"><a href="{{game.downloadLink}}" target="_blank">{{game.title}}</a></div>
 </div>
