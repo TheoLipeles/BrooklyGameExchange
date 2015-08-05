@@ -9,8 +9,11 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('CartCtrl', function ($scope, $stateParams, User, Games, $state, $cookies, AuthService){
-	
-	$scope.signedIn = $stateParams.length > 0;
+	console.log($stateParams)
+
+	$scope.signedIn = $stateParams.id.length > 0;
+
+	console.log($scope.signedIn)
 
 	var getCart = function(){
 		console.log($scope.signedIn);
