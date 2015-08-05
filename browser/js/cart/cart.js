@@ -13,6 +13,8 @@ app.controller('CartCtrl', function ($scope, $stateParams, User, Games, $state, 
 
 	$scope.signedIn = $stateParams.id.length > 0;
 
+	console.log($scope.signedIn)
+
 	var getCart = function(){
 		console.log($scope.signedIn);
 		if ($scope.signedIn) {

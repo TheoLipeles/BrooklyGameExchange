@@ -1,4 +1,4 @@
-<div id="confirm">
+<div id="confirm" class="centeredWithMaxWidth">
 	<h1 ng-hide="games">You are about to spend ${{total()}} on {{cart.length}} game{{plural()}}</h1>
 </br>
 <button ng-hide="games" class="btn btn-success" ng-click="okay()">Okay!</button> <button  ng-hide="games" class="btn btn-danger" ui-sref="cart({id: user._id})">Not yet!</button>
