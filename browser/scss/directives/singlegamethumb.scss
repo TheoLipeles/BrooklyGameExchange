@@ -3,13 +3,14 @@ single-game-thumb {
 
   .individualcontainer {
   	box-sizing: border-box;
+    color: black;
     text-align: left;
     cursor: pointer;
     display: inline-block;
     overflow: hidden;
     width: 230px;
     height: 230px;
-    background: transparent;
+    background: gainsboro;
     margin: 15px;
     border-radius: 0px;
     box-shadow: 0 0 5px 1px #888;
@@ -21,7 +22,7 @@ single-game-thumb {
 
     .littlelabel {
       font-size: 10pt;
-      color: black;
+
     }
 
     img {
@@ -36,6 +37,8 @@ single-game-thumb {
   }
 
   .individualcontainer:hover{
+    background: #600;
+    color: white !important;
     box-shadow: 0 0 20px 5px #888;
     margin-bottom: 13px;
 
