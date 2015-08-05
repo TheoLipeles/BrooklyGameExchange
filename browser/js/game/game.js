@@ -13,6 +13,7 @@ app.config(function ($stateProvider) {
 app.controller('GameCtrl', function ($scope, $stateParams, Games, AuthService, User, user, $state){
 	$scope.user = user;
 	$scope.newReview = {};
+	$scope._ = _;
 
 	Games.getOne($stateParams.id)
 	.then(function(game){

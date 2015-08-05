@@ -18,7 +18,7 @@
 		<div class="col col-md-4" id="rightSide">
 			<h5>Genre: {{thisGame.genre}}</h5><h5>Developer: <a ui-sref='profile({id: thisGame.developer._id})'>{{thisGame.developer.name}}</a></h5>
 
-			<h5>Average rating: {{avgRatingGame}}</h5>
+			<h5>Average rating: <span ng-repeat="rating in _.range(1, avgRatingGame + 1)">★</span><span ng-repeat="rating in _.range(1,5 - avgRatingGame + 1)"</span></h5>
 
 			<h5>Total downloads: {{thisGame.downloads}}</h5>
 
