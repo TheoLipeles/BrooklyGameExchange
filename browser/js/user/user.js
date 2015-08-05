@@ -9,7 +9,8 @@ app.config(function ($stateProvider) {
             authenticate: true
         },
         resolve: {
-            admin: function(AuthService){return AuthService.getLoggedInUser()} 
+            admin: function(AuthService){return AuthService.getLoggedInUser()},
+            users: function(User) {return User.getAll()}
         }
     });
 
@@ -21,23 +22,17 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller("UserCtrl", function($scope, User, Games, admin){
+app.controller("UserCtrl", function($scope, User, Games, admin, users){
+    $scope.users = users;
 
-    User.getAll()
-    .then(function(users){
-        $scope.users = users;
-        $scope.users.deleteUser = function(id) {
-            User.deleteUser(id)
-            .then(function(deletedUser){
-                $scope.users = $scope.users.filter(function(user){
-                    return user._id !== deletedUser._id
-                });
+    $scope.deleteUser = function(id) {
+        User.deleteUser(id)
+        .then(function(deletedUser){
+            $scope.users = $scope.users.filter(function(user){
+                return user._id !== deletedUser._id;
             });
-        };
-    })
-    .then(null, function(err){
-        console.log(err);
-    });
+        });
+    };
 
 });
 

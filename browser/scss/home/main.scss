@@ -8,6 +8,7 @@
   }
 
   h1 {
+    display: block;
     margin-top: 40px;
     text-align: center;
   }
@@ -57,6 +58,9 @@
 }
 
 .centeredWithMaxWidth {
-  width: 1200px;
+  background: white;
+  width: 1500px;
+  padding: 60px 20px;
   margin: 0 auto;
+  box-shadow: 0px 12px 12px 5px #222;
 }

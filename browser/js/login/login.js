@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('LoginCtrl', function ($scope, AuthService, $state) {
+app.controller('LoginCtrl', function ($scope, AuthService, $state, Games, $cookies) {
 
     $scope.login = {};
     $scope.error = null;
@@ -18,6 +18,15 @@ app.controller('LoginCtrl', function ($scope, AuthService, $state) {
         $scope.error = null;
 
         AuthService.login(loginInfo).then(function (data) {
+            $scope.cart = $cookies.get("cart");
+            if ($scope.cart) {
+                $scope.cart = JSON.parse($scope.cart);
+                for (var i = 0; i < $scope.cart.length; i++) {
+                    console.log($scope.cart[i].game, $scope.cart[i].price);
+                    Games.addToCart($scope.cart[i].game, $scope.cart[i].price);
+                }
+                $cookies.remove('cart');
+            }
             $state.go('profile', {id: data._id});
         }).catch(function () {
             $scope.error = 'Invalid login credentials.';

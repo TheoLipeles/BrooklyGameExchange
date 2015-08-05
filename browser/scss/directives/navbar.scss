@@ -6,6 +6,11 @@ navbar {
   border-bottom: 1px solid transparent;
   box-shadow: 1px 1px 14px -3px black;
 
+
+  .btn:focus {
+      color: white !important;
+  }
+
   .container {
     width: 91%;
     max-width: 1340px;
@@ -19,21 +24,24 @@ navbar {
   }
 
   a {
-    color: lightgrey;
+    color: #9eb6b6;
     font-size: 16px;
   }
+
+
 
   .nav > li > a {
     cursor: pointer;
     transition: color 0.2s;
     &.active {
-      color: darken(lightgrey, 10%);
+      color: white;
     }
     &:hover {
       background: none;
-      color: #f31214;
+      color: white;
     }
     &:focus {
+      color: white;
       background: none;
     }
   }
@@ -60,10 +68,10 @@ navbar {
       font-size: 22px;
     }
   }
-
-
-
 }
+
+
+
 
 .navbar {
   margin-bottom: 0px;

@@ -5,10 +5,10 @@
 
 body {
   font-family: 'Open Sans', sans-serif;  font-weight: light;
-  background: #EEE;
-  color: #222;
+  background: url('js/home/footer_lodyas.png');
 
 }
+
 
 @mixin clearfix {
   &:after {
@@ -18,12 +18,19 @@ body {
   }
 }
 
+.glyphicon-shopping-cart{
+  padding-right: 20px;
+}
+.thinner {
+  width: 80%; }
+
 .addPadding{
   padding: 20px;
 }
 
 #main {
-  padding-top: 60px;
+  display: flex;
+  padding-top: 0px;
   margin: 0 auto;
 }
 
@@ -49,6 +56,7 @@ body {
 
 .background {
   background-attachment: fixed;
+  background-size: cover;
   position: absolute;
   margin-top: -60px;
   height: 100%;
@@ -97,32 +105,39 @@ hr{
 }
 
 .card{
-  
+  display: block;
+  height: 150px;
+  transition: .1s;
   &:hover {
-    background-color: gainsboro;
+    border: 4px solid #200;
+    background-color: #600;
+    cursor: pointer;
+    color: white;
   }
 
-  border-radius: 5px;
-  padding: 2%;
+  border-radius: 0px;
+  padding: 5px;
   background-color: white;
 
   img {
     margin: 1%;
   }
 
-  margin: 0.5%;
-  border: 1px solid black;
+  margin: 0%;
+  border: 1px solid lightgrey;
+  overflow: hidden;
 
-  .glyphicon{
-    .glyphicon-remove-sign {
-      margin-left: 3%;
-      color: #600;
+.glyphicon-remove-sign {
+      position: relative;
+      top: 0px;
+      font-size: 10em;
+      color: white ;
     &:hover{
       cursor: pointer;
     }
   }
-
 }
+
 
 @import 'directives/main';
 @import 'home/main';

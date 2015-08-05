@@ -1,5 +1,6 @@
 <div class="centeredWithMaxWidth thinner">
-	<h1>{{name}}'s Cart</h1>
+	<h1 ng-show="signedIn">{{name}}'s Cart</h1>
+	<h1 ng-show="!signedIn">Your Cart</h1>
 	<div ng-show="cart.length" class="panel panel-default addPadding">
 		<div class="container-fluid">
 			<div class="col-xs-6 col-sm-3">
@@ -31,7 +32,9 @@
 			</div>
 		</div>
 	</div>
-	<div ng-show="!!!cart.length"><h3>Your cart is empty! Go <span ui-sref="browse">buy some games!</span></h3></div>
+	<div ng-show="!cart.length">
+<img src="http://i.imgur.com/m79AeEk.png" style="width:400px"></img>
+<h3 style="display:inline">Your cart is empty! Go <span ui-sref="browse" style="color:grey;cursor:pointer">buy some games!</span></h3></div>
 </br>
 <!-- <pre>Your Cart Total is {{getTotal()}}</pre> -->
 

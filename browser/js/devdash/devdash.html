@@ -1,4 +1,4 @@
-<div class="centeredWithMaxWidth thinner devBoard">
+<div class="centeredWithMaxWidth thinner">
 	<h1>{{user.name}}</h1>
 	<div class="stats">
 		<h3>Total Downloads: {{totalDownloads()}}</h3>
@@ -22,7 +22,7 @@
 			<input class="btn btn-success" type="submit"></input>
 		</form>
 		<div class="screenshot col-lg-6">
-			<img ng-src="{{newGame.screenshots[0]}}"></img>
+			<img ng-src="{{newGame.screenshots[0]}}" class="thumbnail" style="width:100%"></img>
 		</div>
 	</div>
 </div>

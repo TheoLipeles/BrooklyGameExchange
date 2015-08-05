@@ -1,7 +1,7 @@
 <nav class="navbar navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <fullstack-logo></fullstack-logo>
+            <a ui-sref='browse'><fullstack-logo></fullstack-logo></a>
         </div>
         <ul class="nav navbar-nav">
             <li ng-repeat="item in items" ng-if="$index < 3">
@@ -18,9 +18,9 @@
             </li>
         </ul>
         <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
-        <div ng-show="user" class="welcome">
+        <div class="welcome">
             <i class="glyphicon glyphicon-shopping-cart"  ui-sref="cart({id: user._id})"></i>
-            <a ng-click="logout()">Logout</a>
+            <a ng-show="user" ng-click="logout()">Logout</a>
         </div>
     </div>
 </nav>
