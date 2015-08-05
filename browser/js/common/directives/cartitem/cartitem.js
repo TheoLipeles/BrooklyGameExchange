@@ -1,4 +1,4 @@
-app.directive('cartitem', function() {
+app.directive('cartItem', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'js/common/directives/cartitem/cartitem.html'
