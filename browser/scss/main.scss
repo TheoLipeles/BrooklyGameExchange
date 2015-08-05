@@ -56,6 +56,7 @@ body {
 
 .background {
   background-attachment: fixed;
+  background-size: cover;
   position: absolute;
   margin-top: -60px;
   height: 100%;
@@ -106,8 +107,11 @@ hr{
 .card{
   display: block;
   height: 150px;
+  transition: .1s;
   &:hover {
-    background-color: gainsboro;
+    background-color: #600;
+    cursor: pointer;
+    color: white;
   }
 
   border-radius: 0px;
@@ -119,20 +123,18 @@ hr{
   }
 
   margin: 0%;
-  border: 1px solid grey;
+  border: 1px solid lightgrey;
   overflow: hidden;
 
-  .glyphicon{
-    .glyphicon-remove-sign {
-      margin-left: 3%;
-      color: #600;
+.glyphicon-remove-sign {
+      position: relative;
+      top: 0px;
+      font-size: 10em;
+      color: white ;
     &:hover{
       cursor: pointer;
     }
   }
-
-  }
-
 }
 
 @import 'directives/main';

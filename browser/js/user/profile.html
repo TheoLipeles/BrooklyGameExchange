@@ -19,7 +19,7 @@
 
 	<div class="recommendations col-lg-4">	
 		<h3>My Recommendations:</h3>
-		<span ng-show='user.recommendations.length == 0'>You have no recommendations! Go buy some games so we know what you're into!</span>
+		<div ng-show='user.recommendations.length == 0'><img src="http://condition1industries.com/images/MegaMan.jpg" class="pull-left" style="width: 75px;"></img>You have no recommendations! Go buy some games so we know what you're into!</div>
 		<single-game-thumb ui-sref='agame({id: game._id})' ng-repeat="game in user.recommendations"></single-game-thumb>
 	</div>
 

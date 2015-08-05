@@ -3,7 +3,7 @@
 		<div class="col col-md-8">
 			<img class ="smallImg thumbnail" ng-repeat="screenshot in thisGame.screenshots" src="{{screenshot}}"></img></br>
 			<div id="titleAndStuff">
-				<h1>{{thisGame.title}} <span ng-show="user.isAdmin" ng-click="deleteGame(thisGame._id)" class="glyphicon glyphicon-remove-sign"></span></h1>		
+				<h1>{{thisGame.title}} <span ng-show="user.isAdmin" ng-click="deleteGame(thisGame._id)" class="glyphicon glyphicon-remove-sign" style="color:#600"></span></h1>		
 
 
 				<div ng-controller="ModalCtrl" class="modalButton">
@@ -16,12 +16,13 @@
 			<hr>
 		</div>
 		<div class="col col-md-4" id="rightSide">
-			<h5>Genre: {{thisGame.genre}}</h5><h5>Developer: {{thisGame.developer.name}}</h5>
+			<h5>Genre: {{thisGame.genre}}</h5><h5>Developer: <a ui-sref='profile({id: thisGame.developer._id})'>{{thisGame.developer.name}}</a></h5>
 
 			<h5>Average rating: {{avgRatingGame}}</h5>
 
+			<h5>Total downloads: {{thisGame.downloads}}</h5>
 
-			MORE LIKE THIS:
+
 		</div>
 
 
