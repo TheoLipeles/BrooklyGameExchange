@@ -128,14 +128,20 @@ hr{
   overflow: hidden;
 
 .glyphicon-remove-sign {
-      position: relative;
-      top: 0px;
-      font-size: 10em;
-      color: white ;
+    position: relative;
+    top: 0px;
+    font-size: 10em;
+    color: white;
     &:hover{
       cursor: pointer;
     }
   }
+}
+
+.glyphicon-search {
+  margin-left: 1.5%;
+  margin-right: 9px;
+  font-size: 16px;
 }
 
 
