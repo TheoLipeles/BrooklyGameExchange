@@ -20,7 +20,7 @@ app.controller('DevDashCtrl',function ($scope, User, user, AuthService){
         	title: null,
         	description: null,
         	genre: null,
-        	screenshot: ['http://vignette3.wikia.nocookie.net/wowwiki/images/7/75/Captain_Placeholder.jpg/revision/latest?cb=20070324064719'],
+        	screenshots: ['http://vignette3.wikia.nocookie.net/wowwiki/images/7/75/Captain_Placeholder.jpg/revision/latest?cb=20070324064719'],
         	minPrice: null,
         	downloadLink: null
     	};
