@@ -29,7 +29,7 @@ var getRecommendations = function(id) {
 	};
 
 	var gameRecommendationValue = function(game) {
-		var totalInCommon = 0;
+		var totalInCommon = 0.00001;
 		for (var i = 0; i < allUsers.length; i++) {
 			if (allUsers[i].purchaseHistory.indexOf(game) !== -1) {
 				totalInCommon += allUsers[i].similarity;
