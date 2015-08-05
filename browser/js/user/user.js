@@ -41,6 +41,11 @@ app.controller("UserProfileCtrl", function($scope, $stateParams, User, AuthServi
     .then(function(user){
         $scope.user = user;
         $scope.id = $stateParams.id;
+        return User.getRecommendations($stateParams.id);
+    })
+    .then(function(games) {
+        console.log("games", games);
+        $scope.user.recommendations = games;
     })
     .then(null, function(err){
         console.log(err);
@@ -54,11 +59,7 @@ app.controller("UserProfileCtrl", function($scope, $stateParams, User, AuthServi
         console.log(err);
     });
 
-    User.getRecommendations($stateParams.id)
-    .then(function(games) {
-        console.log("games", games);
-        $scope.user.recommendations = games;
-    });
+    
 
 
     AuthService.getLoggedInUser()
