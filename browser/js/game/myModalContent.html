@@ -2,7 +2,7 @@
     <span>Enter the amount you'd like to pay</span>
     <div class="modal-body">
         <span>$</span>
-        <input type="number" min="0.00" step="any" id="game" ng-model="game.price" style="width: 5em">
+        <input type="number" min="{{game.price}}" id="game" ng-model="game.finalPrice" style="width: 5em">
     </div>
     <div class="modal-footer" style="text-align:center;">
         <button class="btn btn-primary" ng-click="ok()">Add Game To Cart</button>
