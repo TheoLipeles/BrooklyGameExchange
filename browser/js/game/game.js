@@ -79,6 +79,7 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, Games, $st
 	.then(function(game){
 		$scope.thisGame = game;
 		$scope.game.price = $scope.thisGame.minPrice;
+
 	})
 	.catch(function(err){
 		console.log('error', err);
@@ -86,17 +87,17 @@ app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, Games, $st
 
 	$scope.ok = function(){
 		if ($scope.loggedIn) {
-			Games.addToCart($stateParams.id, $scope.game.price)
+			Games.addToCart($stateParams.id, $scope.game.finalPrice)
 			.then(function() {
 				$modalInstance.dismiss();
 			});
 		} else {
 			var cart = $cookies.get('cart');
 			if (!cart) {
-				cart = [{game: $stateParams.id, price: $scope.game.price}];
+				cart = [{game: $stateParams.id, price: $scope.game.finalPrice}];
 			} else {
 				cart = JSON.parse(cart);
-				cart.push({game: $stateParams.id, price: $scope.game.price});
+				cart.push({game: $stateParams.id, price: $scope.game.finalPrice});
 				console.log(cart);
 			}
 			$cookies.put('cart', JSON.stringify(cart));
