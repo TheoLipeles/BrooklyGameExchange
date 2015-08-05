@@ -1,9 +1,10 @@
 <div class="centeredWithMaxWidth thinner">
 	
 	<div class="stats col-lg-8">
-		<img id="profile-pic" ng-src="{{user.photo}}" width='60px'></img>
+		<img id="profile-pic" ng-src="{{user.photo}}" width='60px' class="thumbnail"></img>
 		<h2>{{user.name}}</h2>
 		<h4>Member since: 2014</h4>
+		<hr>
 		<div>
 				<h3>Games I Bought:</h3><br>
 				<single-game-thumb ui-sref='agame({id: game._id})' ng-repeat="game in user.purchaseHistory"></single-game-thumb>
